@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Rumah Adat</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    .corner-card {
+      @apply bg-white text-black p-4 rounded-lg shadow-lg transform transition-all duration-300 flex items-center justify-center;
+    }
+    .corner-card:hover {
+      @apply scale-105 bg-gray-200;
+    }
+    .btn {
+      @apply bg-blue-600 text-white font-bold py-2 px-4 rounded-lg shadow-lg transform transition-all duration-300;
+    }
+    .btn:hover {
+      @apply scale-105 bg-blue-700;
+    }
+    .quiz-container {
+      @apply bg-white p-8 rounded-lg shadow-xl w-full max-w-lg;
+    }
+    .question {
+      @apply mb-4 text-left text-gray-700;
+    }
+    .result {
+      @apply bg-green-500 text-white p-6 rounded-lg shadow-lg text-center mt-8;
+    }
+  </style>
+</head>
+<body class="bg-blue-600 text-white min-h-screen flex flex-col items-center justify-center relative animate__animated animate__fadeIn">
+
+  <!-- Card Logo di pojok kanan atas -->
+  <a href="tentang.html" class="corner-card absolute top-4 right-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l6 6M12 3l-6 6M12 21l6-6M12 21l-6-6" />
+    </svg>
+    <span class="ml-2 text-sm font-bold">Tentang</span>
+  </a>
+
+  <!-- Konten Utama -->
+  <div class="quiz-container text-center animate__animated animate__fadeInUp">
+    <h1 class="text-4xl font-bold text-blue-600 mb-8">Kuis Rumah Adat</h1>
+    
+    <div id="quiz-container" class="space-y-6">
+      <!-- Soal 1 -->
+      <div class="question hidden" id="question-1">
+        <p class="text-lg font-semibold">1. Rumah adat Toraja dikenal dengan nama?</p>
+        <label class="block"><input type="radio" name="q1" value="Tongkonan" class="mr-2"> Tongkonan</label>
+        <label class="block"><input type="radio" name="q1" value="Joglo" class="mr-2"> Joglo</label>
+        <label class="block"><input type="radio" name="q1" value="Rumah Gadang" class="mr-2"> Rumah Gadang</label>
+      </div>
+
+      <!-- Soal 2 -->
+      <div class="question hidden" id="question-2">
+        <p class="text-lg font-semibold">2. Rumah adat Joglo berasal dari?</p>
+        <label class="block"><input type="radio" name="q2" value="Jawa Tengah" class="mr-2"> Jawa Tengah</label>
+        <label class="block"><input type="radio" name="q2" value="Sumatera Barat" class="mr-2"> Sumatera Barat</label>
+        <label class="block"><input type="radio" name="q2" value="Sulawesi Selatan" class="mr-2"> Sulawesi Selatan</label>
+      </div>
+
+      <!-- Soal 3 -->
+      <div class="question hidden" id="question-3">
+        <p class="text-lg font-semibold">3. Rumah adat Minangkabau disebut?</p>
+        <label class="block"><input type="radio" name="q3" value="Tongkonan" class="mr-2"> Tongkonan</label>
+        <label class="block"><input type="radio" name="q3" value="Rumah Gadang" class="mr-2"> Rumah Gadang</label>
+        <label class="block"><input type="radio" name="q3" value="Joglo" class="mr-2"> Joglo</label>
+      </div>
+
+      <!-- Soal 4 -->
+      <div class="question hidden" id="question-4">
+        <p class="text-lg font-semibold">4. Rumah adat dari Bali disebut?</p>
+        <label class="block"><input type="radio" name="q4" value="Tongkonan" class="mr-2"> Tongkonan</label>
+        <label class="block"><input type="radio" name="q4" value="Joglo" class="mr-2"> Joglo</label>
+        <label class="block"><input type="radio" name="q4" value="Bale" class="mr-2"> Bale</label>
+      </div>
+
+      <!-- Soal 5 -->
+      <div class="question hidden" id="question-5">
+        <p class="text-lg font-semibold">5. Rumah adat Sumatera Utara dikenal dengan nama?</p>
+        <label class="block"><input type="radio" name="q5" value="Bolon" class="mr-2"> Bolon</label>
+        <label class="block"><input type="radio" name="q5" value="Joglo" class="mr-2"> Joglo</label>
+        <label class="block"><input type="radio" name="q5" value="Bale" class="mr-2"> Bale</label>
+      </div>
+    </div>
+
+    <!-- Navigasi Soal -->
+    <div class="mt-8 flex justify-between">
+      <button id="prev-btn" onclick="prevQuestion()" class="btn" disabled>Back</button>
+      <button id="next-btn" onclick="nextQuestion()" class="btn">Next</button>
+    </div>
+
+    <!-- Hasil Kuis -->
+    <div id="result" class="result hidden mt-8 animate__animated animate__fadeInUp"></div>
+  </div>
+
+  <script>
+    let currentQuestion = 1;
+    const totalQuestions = 5;
+
+    function showQuestion(questionNumber) {
+      document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
+      document.getElementById(`question-${questionNumber}`).classList.remove('hidden');
+      
+      document.getElementById('prev-btn').disabled = questionNumber === 1;
+      document.getElementById('next-btn').textContent = questionNumber === totalQuestions ? 'Submit' : 'Next';
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      } else {
+        submitQuiz();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    }
+
+    function submitQuiz() {
+      const answers = {
+        q1: 'Tongkonan',
+        q2: 'Jawa Tengah',
+        q3: 'Rumah Gadang',
+        q4: 'Bale',
+        q5: 'Bolon'
+      };
+      let score = 0;
+      let correctAnswers = [];
+
+      for (let i = 1; i <= totalQuestions; i++) {
+        const userAnswer = document.querySelector(`input[name="q${i}"]:checked`);
+        if (userAnswer && userAnswer.value === answers[`q${i}`]) {
+          score++;
+          correctAnswers.push(`Soal ${i}: ${answers[`q${i}`]}`);
+        }
+      }
+
+      document.getElementById('result').innerHTML = `
+        <h2 class="text-2xl font-bold">Skor Anda: ${score}/5</h2>
+        <p class="mt-4">Jawaban yang benar:</p>
+        <ul class="mt-2 list-disc list-inside">${correctAnswers.map(answer => `<li>${answer}</li>`).join('')}</ul>
+      `;
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('quiz-container').classList.add('hidden');
+      document.getElementById('next-btn').classList.add('hidden');
+      document.getElementById('prev-btn').classList.add('hidden');
+    }
+
+    showQuestion(currentQuestion);
+  </script>
+</body>
+</html>
