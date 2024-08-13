@@ -1,37 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Educational Game</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Puzzle</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .corner-card {
+      @apply bg-white text-black p-4 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 flex items-center justify-center;
+    }
+  </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="flex items-center justify-center min-h-screen">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold mb-4">Educational Game</h1>
-            <div class="space-y-4">
-                <a href="puzzle.html" class="bg-blue-500 text-white px-4 py-2 rounded block">Play Puzzle</a>
-                <a href="guess-image.html" class="bg-green-500 text-white px-4 py-2 rounded block">Play Guess the Image</a>
-                <a href="number-game.html" class="bg-yellow-500 text-white px-4 py-2 rounded block">Play Number Game</a>
-                <button onclick="showCredits()" class="bg-gray-500 text-white px-4 py-2 rounded">Credits</button>
-            </div>
-            <div id="credits" class="hidden mt-4">
-                <p>Created by: Your Name</p>
-                <p>This is a simple educational game for learning purposes.</p>
-                <button onclick="hideCredits()" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Back</button>
-            </div>
-        </div>
-    </div>
+<body class="bg-blue-600 text-white min-h-screen flex flex-col items-center justify-center relative">
+  
+  <!-- Card Logo di pojok kanan atas -->
+  <a href="tentang.html" class="corner-card absolute top-4 right-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l6 6M12 3l-6 6M12 21l6-6M12 21l-6-6" />
+    </svg>
+    <span class="ml-2 text-sm font-bold">Tentang</span>
+  </a>
 
-    <script>
-        function showCredits() {
-            document.getElementById('credits').classList.remove('hidden');
-        }
+  <!-- Konten Utama -->
+  <div class="w-full max-w-md p-4 text-center">
+    <h1 class="text-4xl font-bold text-white mb-8">Game Puzzle</h1>
+    <a href="dashboard.html" class="corner-card mx-auto">
+      <span class="bg-white p-5 w-70 rounded-full text-black text-xl font-bold">Mulai</span>
+    </a>
+  </div>
 
-        function hideCredits() {
-            document.getElementById('credits').classList.add('hidden');
-        }
-    </script>
 </body>
 </html>
