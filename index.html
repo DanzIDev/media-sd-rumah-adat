@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="text-center">
+            <h1 class="text-4xl font-bold mb-4">Educational Game</h1>
+            <div class="space-y-4">
+                <a href="puzzle.html" class="bg-blue-500 text-white px-4 py-2 rounded block">Play Puzzle</a>
+                <a href="guess-image.html" class="bg-green-500 text-white px-4 py-2 rounded block">Play Guess the Image</a>
+                <a href="number-game.html" class="bg-yellow-500 text-white px-4 py-2 rounded block">Play Number Game</a>
+                <button onclick="showCredits()" class="bg-gray-500 text-white px-4 py-2 rounded">Credits</button>
+            </div>
+            <div id="credits" class="hidden mt-4">
+                <p>Created by: Your Name</p>
+                <p>This is a simple educational game for learning purposes.</p>
+                <button onclick="hideCredits()" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showCredits() {
+            document.getElementById('credits').classList.remove('hidden');
+        }
+
+        function hideCredits() {
+            document.getElementById('credits').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .puzzle-piece {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #ccc;
+            cursor: grab;
+            background-size: 300%;
+            background-repeat: no-repeat;
+        }
+        .puzzle-slot {
+            width: 100px;
+            height: 100px;
+            border: 2px dashed #888;
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="flex flex-col items-center justify-center min-h-screen">
+        <h1 class="text-4xl font-bold mb-4">Puzzle Game</h1>
+        
+        <div id="puzzle-board" class="grid grid-cols-3 grid-rows-3 gap-1 mb-4">
+            <!-- Puzzle slots will be generated here -->
+        </div>
+
+        <div id="puzzle-pieces" class="flex flex-wrap gap-2 justify-center mb-4">
+            <!-- Puzzle pieces will be generated here -->
+        </div>
+        
+        <button id="next-puzzle-btn" class="bg-blue-500 text-white px-4 py-2 rounded mb-2" disabled>Next Puzzle</button>
+        <button onclick="goBack()" class="bg-gray-500 text-white px-4 py-2 rounded">Back</button>
+        <p id="score" class="mt-4">Score: 0</p>
+    </div>
+
+    <script>
+        const puzzleImages = [
+            'assets/images/puzzle1.jpg',
+        ];
+
+        let currentImageIndex = 0;
+        let score = 0;
+
+        function createPuzzle(imageSrc) {
+            const puzzleBoard = document.getElementById('puzzle-board');
+            const puzzlePieces = document.getElementById('puzzle-pieces');
+            puzzleBoard.innerHTML = '';
+            puzzlePieces.innerHTML = '';
+
+            const pieceIndices = [...Array(9).keys()];
+            const shuffledIndices = pieceIndices.sort(() => Math.random() - 0.5);
+
+            shuffledIndices.forEach(index => {
+                const piece = document.createElement('div');
+                piece.style.backgroundImage = `url(${imageSrc})`;
+
+                const xPosition = (index % 3) * -100; 
+                const yPosition = Math.floor(index / 3) * -100;
+
+                piece.style.backgroundPosition = `${xPosition}px ${yPosition}px`;
+                piece.classList.add('puzzle-piece');
+                piece.draggable = true;
+                piece.dataset.index = index;
+                piece.ondragstart = drag;
+
+                puzzlePieces.appendChild(piece);
+            });
+
+            for (let i = 0; i < 9; i++) {
+                const slot = document.createElement('div');
+                slot.classList.add('puzzle-slot');
+                slot.dataset.index = i;
+                slot.ondrop = drop;
+                slot.ondragover = allowDrop;
+                puzzleBoard.appendChild(slot);
+            }
+        }
+
+        function shufflePieces() {
+            document.getElementById('next-puzzle-btn').disabled = true;
+            createPuzzle(puzzleImages[currentImageIndex]);
+            score = 0;
+            document.getElementById('score').innerText = 'Score: 0';
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text/plain", event.target.dataset.index);
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const draggedIndex = event.dataTransfer.getData("text/plain");
+
+            if (event.target.classList.contains('puzzle-slot')) {
+                const draggedPiece = document.querySelector(`[data-index="${draggedIndex}"].puzzle-piece`);
+                if (draggedPiece) {
+                    const dropSlot = event.target;
+
+                    dropSlot.style.backgroundImage = draggedPiece.style.backgroundImage;
+                    dropSlot.style.backgroundPosition = draggedPiece.style.backgroundPosition;
+                    dropSlot.classList.add('puzzle-piece');
+                    dropSlot.classList.remove('puzzle-slot');
+                    dropSlot.draggable = false;
+
+                    draggedPiece.remove();
+
+                    score++;
+                    document.getElementById('score').innerText = `Score: ${score}`;
+
+                    checkSolved();
+                }
+            }
+        }
+
+        function checkSolved() {
+            const slots = [...document.querySelectorAll('#puzzle-board .puzzle-piece')];
+            let solved = true;
+
+            slots.forEach(slot => {
+                const position = slot.dataset.index;
+                const correctPosition = `${(position % 3) * -100}px ${(Math.floor(position / 3)) * -100}px`;
+
+                if (slot.style.backgroundPosition !== correctPosition) {
+                    solved = false;
+                }
+            });
+
+            if (solved && slots.length === 9) {
+                if (currentImageIndex < puzzleImages.length - 1) {
+                    alert('Yee ! Puzzle sudah di selesaikan ');
+                    document.getElementById('next-puzzle-btn').disabled = false;
+                } else {
+                    alert('All puzzles completed! Your final score is: ' + score);
+                    document.getElementById('next-puzzle-btn').disabled = true;
+                }
+            }
+        }
+
+        document.getElementById('next-puzzle-btn').addEventListener('click', function() {
+            if (!this.disabled) {
+                currentImageIndex++;
+                if (currentImageIndex >= puzzleImages.length) {
+                    alert('All puzzles completed! Your final score is: ' + score);
+                    this.disabled = true;
+                } else {
+                    shufflePieces();
+                }
+            }
+        });
+
+        // Initialize first puzzle
+        shufflePieces();
+
+        // Dummy goBack function
+        function goBack() {
+            alert("Back button clicked");
+        }
+    </script>
+</body>
+</html>
