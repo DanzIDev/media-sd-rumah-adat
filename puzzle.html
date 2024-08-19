@@ -14,16 +14,56 @@
             background-size: 300%;
             background-repeat: no-repeat;
         }
+
         .puzzle-slot {
             width: 100px;
             height: 100px;
             border: 2px dashed #888;
             background-color: #f0f0f0;
         }
+
+        body {
+            position: relative;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Warna biru gradient modern */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0;
+            background-color: #2a5298;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            text-align: center;
+            font-size: 14px;
+            text-decoration: none;
+            color: white;
+            flex-grow: 1;
+            padding: 10px 0;
+        }
+
+        .navbar a:hover {
+            background-color: #1e3c72;
+        }
+
+        .navbar svg {
+            display: block;
+            margin: 0 auto 4px;
+            width: 24px;
+            height: 24px;
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
-    <div class="flex flex-col items-center justify-center min-h-screen">
+    <div class="flex flex-col items-center justify-center min-h-screen pb-20">
         <h1 class="text-4xl font-bold mb-4">Puzzle Game</h1>
         
         <div id="puzzle-board" class="grid grid-cols-3 grid-rows-3 gap-1 mb-4">
@@ -35,9 +75,33 @@
         </div>
         
         <button id="next-puzzle-btn" class="bg-blue-500 text-white px-4 py-2 rounded mb-2" disabled>Next Puzzle</button>
-        <button onclick="goBack()" class="bg-gray-500 text-white px-4 py-2 rounded">Back</button>
-        <p id="score" class="mt-4">Score: 0</p>
+        <button onclick="goBack()" class="bg-gray-500 text-white px-4 py-2 rounded mb-2">Back</button>
+        <p id="score" class="mt-4 mb-4">Score: 0</p>
     </div>
+
+    <!-- Tombol Kembali, Home, Next -->
+    <div class="navbar">
+        <a href="dashboard.html">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 9v-8a2 2 0 012-2h4a2 2 0 012 2v8m-6-6h.01" />
+            </svg>
+            Home
+        </a>
+        <a href="javascript:history.back()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+        </a>
+        <a href="#next">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            Next
+        </a>
+    </div>
+</body>
+</html>
 
     <script>
         const puzzleImages = [
@@ -134,7 +198,7 @@
                     solved = false;
                 }
             });
- 
+
             if (solved && slots.length === 9) {
                 if (currentImageIndex < puzzleImages.length - 1) {
                     alert('Yee ! Puzzle sudah di selesaikan ');
@@ -161,9 +225,17 @@
         // Initialize first puzzle
         shufflePieces();
 
-        // Dummy goBack function
+        // Dummy functions for the new buttons
         function goBack() {
-            alert("Back button clicked");
+            alert("Kembali button clicked");
+        }
+
+        function goHome() {
+            alert("Home button clicked");
+        }
+
+        function goNext() {
+            alert("Next button clicked");
         }
     </script>
 </body>
