@@ -1,25 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Number Game</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="flex items-center justify-center min-h-screen">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold mb-4">Number Game</h1>
-            <input id="player-name" type="text" placeholder="Enter your name" class="border rounded px-4 py-2 mb-4">
-            <p>Blum beres...</p>
-            <p id="score" class="mt-4">Score: 0</p>
-            <button onclick="goBack()" class="mt-4 bg-gray-500 text-white px-4 py-2 rounded">Back</button>
-        </div>
-    </div>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materi Rumah Adat Nusantara</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3c72, #2a5298); /* Modern blue gradient */
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
 
-    <script src="script.js"></script>
-    <script>
-        // Add number game logic here
-    </script>
+    .card-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .card {
+      background-color: white;
+      color: black;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      font-size: 0.875rem; /* Adjusted font size for smaller screens */
+    }
+    
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 50;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .modal-content {
+      background-color: white;
+      color: black;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      text-align: left;
+    }
+
+    .close-btn {
+      background-color: #e53e3e;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: -1rem;
+      margin-right: -1rem;
+    }
+    
+    .close-btn:hover {
+      background-color: #c53030;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      background-color: #2a5298;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar a {
+      text-align: center;
+      font-size: 14px;
+      text-decoration: none;
+      color: white;
+      flex-grow: 1;
+      padding: 10px 0;
+    }
+
+    .navbar a:hover {
+      background-color: #1e3c72;
+    }
+
+    .navbar svg {
+      display: block;
+      margin: 0 auto 4px;
+      width: 24px;
+      height: 24px;
+    }
+
+  </style>
+</head>
+<body class="animate__animated animate__fadeIn">
+
+  <!-- Card Logo di pojok kanan atas -->
+  <a href="tentang.html" class="corner-card absolute top-4 right-4">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="w-6 h-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l6 6M12 3l-6 6M12 21l6-6M12 21l-6-6" />
+    </svg>
+    <span class="ml-2 text-sm font-bold">Tentang</span>
+  </a>
+
+  <!-- Konten Utama -->
+  <div class="content-container text-center animate__animated animate__fadeInUp">
+    <h1 class="text-3xl font-bold text-white mb-6">Mengenal Rumah Adat Nusantara</h1>
+    <p class="text-base">
+      Indonesia adalah negara kepulauan yang kaya akan budaya, termasuk rumah adat yang mencerminkan kearifan lokal dan kondisi alam setiap daerah.
+    </p>
+
+    <!-- Daftar Rumah Adat -->
+    <div class="card-list mt-6">
+      <div class="card" onclick="showInfo('Banten')">Banten</div>
+      <div class="card" onclick="showInfo('DKI Jakarta')">DKI Jakarta</div>
+      <div class="card" onclick="showInfo('Jawa Barat')">Jawa Barat</div>
+      <div class="card" onclick="showInfo('Jawa Tengah')">Jawa Tengah</div>
+      <div class="card" onclick="showInfo('DIY')">D.I Yogyakarta</div>
+    </div>
+  </div>
+
+  <!-- Modal Pop-Up -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content animate__animated animate__fadeInDown">
+      <span id="closeModal" class="close-btn float-right">Close</span>
+      <div id="info-container" class="mt-4">
+        <!-- Info rumah adat akan muncul di sini -->
+      </div>
+    </div>
+  </div>
+
+      <!-- Navigasi -->
+  <div class="navbar">
+    <a href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 9v-8a2 2 0 012-2h4a2 2 0 012 2v8m-6-6h.01" />
+      </svg>
+      Home
+    </a>
+    <a href="index.html">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+      </svg>
+      Back
+    </a>
+  </div>
+
+  <script>
+    const infoModal = document.getElementById('infoModal');
+    const infoContainer = document.getElementById('info-container');
+    const closeModal = document.getElementById('closeModal');
+
+    function showInfo(region) {
+      let content = '';
+      switch (region) {
+        case 'Banten':
+          content = `
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Banten: Sulah Nyanda</h2>
+            <p>Suku asli yang tinggal di Provinsi Banten adalah suku Badui. Suku ini memiliki rumah adat bernama sulah nyanda. Rumah tradisional ini menyatu dengan alam karena bahan-bahannya berasal dari alam. Alas pondasinya terbuat dari batu, lantainya dari bambu yang dibelah, dindingnya terbuat dari anyaman bambu, tiangnya dari balok kayu berukuran besar, dan atapnya dibuat dari bilah bambu dan ijuk.</p>`;
+          break;
+        case 'DKI Jakarta':
+          content = `
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DKI Jakarta: Kebaya</h2>
+            <p>Rumah adat Provinsi DKI Jakarta disebut dengan rumah kebaya. Rumah ini adalah ciri khas suku Betawi. Atap rumah kebaya berbentuk pelana yang dilipat. Jika dilihat dari samping, atapnya seperti lipatan kebaya. Di teras rumah biasanya tersedia meja dan kursi untuk menerima tamu atau minum teh di sore hari bersama keluarga. Rumah kebaya biasa dicat dengan warna-warna cerah.</p>`;
+          break;
+        case 'Jawa Barat':
+          content = `
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Barat: Jolopong</h2>
+            <p>Masyarakat Jawa Barat memiliki banyak bentuk rumah adat, tetapi yang paling populer adalah rumah jolopong. Bentuk rumah ini adalah rumah panggung yang tingginya 40—60 cm di atas permukaan tanah dan ada tangga di teras rumah. Bahan-bahan yang digunakan adalah bahan alami, yaitu kayu, bambu, ijuk, daun kelapa, batu, dan tanah. Atapnya memanjang dan berbentuk segitiga sama kaki seperti tergolek lurus atau jolopong (terkulai).</p>`;
+          break;
+        case 'Jawa Tengah':
+          content = `
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Tengah: Joglo</h2>
+            <p>Joglo adalah nama rumah adat Jawa Tengah. Keunikan rumah ini ada pada atapnya yang berbentuk tajug atau piramida. Filosofi bentuk atap tersebut adalah tempat tinggal para dewa dan rumah yang paling besar dari rumah adat Jawa lainnya. Bentuk rumah joglo tidak hanya ada di Jawa Tengah saja. Hampir semua rumah di Pulau Jawa berbentuk rumah joglo. Dahulu, rumah joglo hanya dimiliki oleh para bangsawan atau orang kaya, sedangkan masyarakat biasa menggunakan rumah bentuk panggung atau kampung.</p>`;
+          break;
+        case 'DIY':
+          content = `
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DIY: Joglo Yogyakarta</h2>
+            <p>Rumah adat Provinsi DI Yogyakarta adalah rumah joglo Yogyakarta. Rumah ini sering disebut dengan istilah rumah jogja. Rumah jogja identik dengan tiang utama atau soko guru yang bentuknya sangat besar. Tiang utama ini terbuat dari kayu jati berkualitas tinggi. Soko guru ada di tengah bangunan rumah dan dikelilingi empat tiang kecil yang terbuat dari kayu jati juga. Keunikan lainnya adalah atap rumah jogja yang berbentuk tajug atau piramida.</p>`;
+          break;
+      }
+      infoContainer.innerHTML = content;
+      infoModal.style.display = 'flex';
+    }
+
+    closeModal.onclick = function() {
+      infoModal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target === infoModal) {
+        infoModal.style.display = 'none';
+      }
+    }
+  </script>
+
 </body>
 </html>
