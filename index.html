@@ -60,31 +60,42 @@
   </a>
 
   <!-- Konten Utama -->
-  <div class="w-full max-w-md p-4">
-    <h1 class="text-4xl font-bold text-center mb-8">Selamat Datang di Media Pembelajaran Rumah Adat</h1>
-    <div class="flex flex-col gap-6 mb-8">
-      <!-- Card 1 -->
-      <a href="dashboard.html" class="bg-white rounded-full shadow-lg text-black flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-        
-        <h2 class="text-xl font-bold">Play Game</h2>
-      </a>
-      <!-- Card 2 -->
-      <a href="edukasi.html" class="bg-white rounded-full shadow-lg text-black flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-       
-        <h2 class="text-xl font-bold">Edukasi</h2>
-      </a>
-      <!-- Card 3 -->
-      <a href="cara-bermain.html" class="bg-white rounded-full shadow-lg text-black flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-        
-        <h2 class="text-xl font-bold">Quiz</h2>
-      </a>
-      <!-- Card 4 -->
-      <a href="tentang-kami.html" class="bg-white rounded-full shadow-lg text-black flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-       
-        <h2 class="text-xl font-bold">Keluar</h2>
-      </a>
-    </div>
+<div class="w-full max-w-md p-4">
+  <h1 class="text-4xl font-bold text-center mb-8 text-600">Selamat Datang di Media Pembelajaran Rumah Adat</h1>
+  <div class="flex flex-col gap-6 mb-8">
+    <!-- Card 1: Play Game -->
+    <!-- <a href="index.html" class="bg-green-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
+      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A4 4 0 105.5 13.154l1.12.747a8.001 8.001 0 007.926.002l1.226-.816a4.003 4.003 0 00-.02-6.92z"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11v6"></path>
+      </svg>
+      <h2 class="text-xl font-bold">Play Game</h2>
+    </a> -->
+    <!-- Card 2: Edukasi -->
+    <a href="edukasi.html" class="bg-blue-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
+      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v6m0 4v.01"></path>
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path>
+      </svg>
+      <h2 class="text-xl font-bold">Edukasi</h2>
+    </a>
+    <!-- Card 3: Quiz -->
+    <a href="cara-bermain.html" class="bg-purple-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
+      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75l7.5 4.5-7.5 4.5V6.75z"></path>
+      </svg>
+      <h2 class="text-xl font-bold">Quiz</h2>
+    </a>
+    <!-- Card 4: Keluar -->
+    <a href="tentang-kami.html" class="bg-red-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
+      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+      <h2 class="text-xl font-bold">Keluar</h2>
+    </a>
   </div>
+</div>
+
 
   <!-- Tombol 'Sound' di pojok kiri bawah -->
   <button id="soundButton" class="corner-card absolute bottom-4 left-4">
@@ -94,7 +105,7 @@
     <span class="ml-2 text-sm font-bold">Sound</span>
   </button>
 
-  <audio id="backgroundAudio" src="your-audio-file.mp3"></audio>
+  <audio id="backgroundAudio" src="music.mp3"></audio>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
