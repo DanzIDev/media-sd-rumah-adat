@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
     body {
-      background: linear-gradient(135deg, #1e3c72, #2a5298); /* Modern blue gradient */
+      background: linear-gradient(135deg, #1e90ff, #ff7f50); /* Colorful gradient for kids */
       color: white;
       min-height: 100vh;
       display: flex;
@@ -16,6 +16,7 @@
       justify-content: center;
       align-items: center;
       padding: 1rem;
+      font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font for kids */
     }
 
     .card-list {
@@ -27,19 +28,20 @@
     }
 
     .card {
-      background-color: white;
-      color: black;
+      background-color: #ffeb3b; /* Bright yellow for cards */
+      color: #333;
       padding: 0.75rem;
       border-radius: 0.5rem;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
       cursor: pointer;
-      transition: transform 0.3s ease;
-      font-size: 0.875rem; /* Adjusted font size for smaller screens */
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      font-size: 0.875rem;
     }
-    
+
     .card:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
+      background-color: #ffca28; /* Slightly darker yellow on hover */
     }
 
     .modal {
@@ -58,8 +60,8 @@
     }
 
     .modal-content {
-      background-color: white;
-      color: black;
+      background-color: #ffffff;
+      color: #333;
       padding: 1.5rem;
       border-radius: 0.5rem;
       max-width: 400px;
@@ -78,10 +80,11 @@
       margin-top: -1rem;
       margin-right: -1rem;
     }
-    
+
     .close-btn:hover {
       background-color: #c53030;
     }
+
     .navbar {
       display: flex;
       justify-content: space-around;
@@ -114,7 +117,6 @@
       width: 24px;
       height: 24px;
     }
-
   </style>
 </head>
 <body class="animate__animated animate__fadeIn">
@@ -154,7 +156,7 @@
     </div>
   </div>
 
-      <!-- Navigasi -->
+  <!-- Navigasi -->
   <div class="navbar">
     <a href="index.html">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -162,7 +164,7 @@
       </svg>
       Home
     </a>
-    <a href="index.html">
+    <a href="#back">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
@@ -181,27 +183,32 @@
         case 'Banten':
           content = `
             <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Banten: Sulah Nyanda</h2>
-            <p>Suku asli yang tinggal di Provinsi Banten adalah suku Badui. Suku ini memiliki rumah adat bernama sulah nyanda. Rumah tradisional ini menyatu dengan alam karena bahan-bahannya berasal dari alam. Alas pondasinya terbuat dari batu, lantainya dari bambu yang dibelah, dindingnya terbuat dari anyaman bambu, tiangnya dari balok kayu berukuran besar, dan atapnya dibuat dari bilah bambu dan ijuk.</p>`;
+            <p>Suku asli yang tinggal di Provinsi Banten adalah suku Badui. Suku ini memiliki rumah adat bernama sulah nyanda. Rumah tradisional ini menyatu dengan alam karena bahan-bahannya berasal dari alam. Alas pondasinya terbuat dari batu, lantainya dari bambu yang dibelah, dindingnya terbuat dari anyaman bambu, tiangnya dari balok kayu berukuran besar, dan atapnya dibuat dari bilah bambu dan ijuk.</p><br />
+            <a href="puzzle-baduy.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Banten</a>`;
           break;
         case 'DKI Jakarta':
           content = `
             <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DKI Jakarta: Kebaya</h2>
-            <p>Rumah adat Provinsi DKI Jakarta disebut dengan rumah kebaya. Rumah ini adalah ciri khas suku Betawi. Atap rumah kebaya berbentuk pelana yang dilipat. Jika dilihat dari samping, atapnya seperti lipatan kebaya. Di teras rumah biasanya tersedia meja dan kursi untuk menerima tamu atau minum teh di sore hari bersama keluarga. Rumah kebaya biasa dicat dengan warna-warna cerah.</p>`;
+            <p>Rumah adat Provinsi DKI Jakarta disebut dengan rumah kebaya. Rumah ini adalah ciri khas suku Betawi. Atap rumah kebaya berbentuk pelana yang dilipat. Jika dilihat dari samping, atapnya seperti lipatan kebaya. Di teras rumah biasanya tersedia meja dan kursi yang digunakan sebagai tempat bersantai dan menerima tamu. Ciri khas lain dari rumah adat ini adalah penggunaan pagar yang mengelilingi rumah.</p><br />
+            <a href="puzzle-jakarta.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Jakarta</a>`;
           break;
         case 'Jawa Barat':
           content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Barat: Jolopong</h2>
-            <p>Masyarakat Jawa Barat memiliki banyak bentuk rumah adat, tetapi yang paling populer adalah rumah jolopong. Bentuk rumah ini adalah rumah panggung yang tingginya 40—60 cm di atas permukaan tanah dan ada tangga di teras rumah. Bahan-bahan yang digunakan adalah bahan alami, yaitu kayu, bambu, ijuk, daun kelapa, batu, dan tanah. Atapnya memanjang dan berbentuk segitiga sama kaki seperti tergolek lurus atau jolopong (terkulai).</p>`;
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Barat: Julang Ngapak</h2>
+            <p>Rumah tradisional Jawa Barat adalah rumah Julang Ngapak yang mencerminkan ciri khas suku Sunda. Nama julang ngapak ini menggambarkan bentuk atap rumahnya yang menyerupai sayap burung yang sedang mengepak. Konstruksi rumah julang ngapak sederhana, namun sangat fungsional dan memiliki makna filosofis yang mendalam.</p><br />
+            <a href="puzzle.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Jawa Barat</a>`;
           break;
         case 'Jawa Tengah':
           content = `
             <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Tengah: Joglo</h2>
-            <p>Joglo adalah nama rumah adat Jawa Tengah. Keunikan rumah ini ada pada atapnya yang berbentuk tajug atau piramida. Filosofi bentuk atap tersebut adalah tempat tinggal para dewa dan rumah yang paling besar dari rumah adat Jawa lainnya. Bentuk rumah joglo tidak hanya ada di Jawa Tengah saja. Hampir semua rumah di Pulau Jawa berbentuk rumah joglo. Dahulu, rumah joglo hanya dimiliki oleh para bangsawan atau orang kaya, sedangkan masyarakat biasa menggunakan rumah bentuk panggung atau kampung.</p>`;
+            <p>Rumah joglo adalah rumah tradisional yang menjadi identitas budaya Jawa Tengah. Rumah ini dibangun dengan bahan utama kayu jati yang berkualitas. Bagian utama rumah disebut pendopo yang berfungsi sebagai tempat menerima tamu. Filosofi rumah joglo adalah sebagai simbol keterbukaan dan kerendahan hati masyarakat Jawa Tengah.</p> <br />
+            <a href="puzzle-jateng.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Jawa Tengah</a>`;
           break;
         case 'DIY':
           content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DIY: Joglo Yogyakarta</h2>
-            <p>Rumah adat Provinsi DI Yogyakarta adalah rumah joglo Yogyakarta. Rumah ini sering disebut dengan istilah rumah jogja. Rumah jogja identik dengan tiang utama atau soko guru yang bentuknya sangat besar. Tiang utama ini terbuat dari kayu jati berkualitas tinggi. Soko guru ada di tengah bangunan rumah dan dikelilingi empat tiang kecil yang terbuat dari kayu jati juga. Keunikan lainnya adalah atap rumah jogja yang berbentuk tajug atau piramida.</p>`;
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DIY: Joglo</h2>
+            <p>Rumah joglo dari Yogyakarta memiliki sedikit perbedaan dengan rumah joglo Jawa Tengah. Rumah ini memiliki makna filosofis yang dalam, mencerminkan keharmonisan antara manusia, alam, dan Tuhan. Rumah joglo Yogyakarta juga sering digunakan untuk berbagai upacara adat dan kegiatan kebudayaan.</p><br />
+            <a href="puzzle-diy.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Yogyakarta</a>`;
           break;
       }
       infoContainer.innerHTML = content;
@@ -213,7 +220,7 @@
     }
 
     window.onclick = function(event) {
-      if (event.target === infoModal) {
+      if (event.target == infoModal) {
         infoModal.style.display = 'none';
       }
     }
