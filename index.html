@@ -8,129 +8,176 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body {
-      position: relative;
-      min-height: 100vh;
-      background-color: #000; /* Tambahkan ini untuk menghindari flashing saat memuat gambar */
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      color: white;
+      font-family: sans-serif;
     }
-  
-    body::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('./assets/images/bground.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      filter: blur(2px) brightness(70%); /* Menambahkan efek blur pada gambar */
-      z-index: -1; /* Membawa elemen ini di belakang konten lainnya */
+
+    .main-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+      padding: 0 2rem;
     }
-    
-  
+
+    .image-container {
+      width: 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .menu-container {
+      width: 45%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
     .btn {
-      @apply flex items-center justify-center px-6 py-3 rounded-lg shadow-lg transition-all duration-300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 250px;
+      height: 60px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      border-radius: 25px;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
-  
+
     .btn:hover {
-      @apply bg-gray-200;
+      background-color: white;
+      transform: scale(1.05);
     }
-  
-    .btn-icon {
-      @apply w-6 h-6 mr-2;
+
+    .btn svg {
+      margin-right: 10px;
     }
-  
+
     .corner-card {
-      @apply bg-white text-black p-4 rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 flex items-center justify-center;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: white;
+      color: black;
+      padding: 10px 20px;
+      border-radius: 20px;
     }
-  
-    .corner-card svg {
-      @apply h-6 w-6;
+
+    .suara-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      height: 60px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .suara-btn:hover {
+      background-color: white;
+      transform: scale(1.05);
+    }
+
+    .suara-btn svg {
+      width: 24px;
+      height: 24px;
     }
   </style>
-  
-  
 </head>
-<body class="bg-blue-600 text-white min-h-screen flex flex-col items-center justify-center relative">
-  
-  <!-- Tombol 'Tentang' di pojok kiri atas -->
-  <a href="tentang.html" class="btn btn-white corner-card absolute top-4 left-4">
-    <span class="bg-white text-black ml-2 text-sm font-bold p-4 m-4 rounded-full">Tentang</span>
+<body>
+
+  <!-- 'Tentang' Button in top-left corner -->
+  <a href="tentang.html" class="corner-card">
+    Tentang
   </a>
 
-  <!-- Konten Utama -->
-<div class="w-full max-w-md p-4">
-  <h1 class="text-4xl font-bold text-center mb-8 text-600">Selamat Datang di Media Pembelajaran Rumah Adat</h1>
-  <div class="flex flex-col gap-6 mb-8">
-    <!-- Card 1: Play Game -->
-    <!-- <a href="index.html" class="bg-green-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A4 4 0 105.5 13.154l1.12.747a8.001 8.001 0 007.926.002l1.226-.816a4.003 4.003 0 00-.02-6.92z"></path>
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11v6"></path>
-      </svg>
-      <h2 class="text-xl font-bold">Play Game</h2>
-    </a> -->
-    <!-- Card 2: Edukasi -->
-    <a href="edukasi.html" class="bg-blue-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v6m0 4v.01"></path>
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path>
-      </svg>
-      <h2 class="text-xl font-bold">Edukasi</h2>
-    </a>
-    <!-- Card 3: Quiz -->
-    <a href="cara-bermain.html" class="bg-purple-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75l7.5 4.5-7.5 4.5V6.75z"></path>
-      </svg>
-      <h2 class="text-xl font-bold">Quiz</h2>
-    </a>
-    <!-- Card 4: Keluar -->
-    <a href="tentang-kami.html" class="bg-red-400 text-white rounded-full shadow-lg flex items-center justify-center transform hover:scale-105 transition-transform duration-300 p-6" data-aos="fade-up">
-      <svg class="w-8 h-8 mr-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-      </svg>
-      <h2 class="text-xl font-bold">Keluar</h2>
-    </a>
+  <!-- Main Content -->
+  <div class="main-container">
+    <!-- Left Column: Image -->
+    <div class="image-container">
+      <img src="./assets/images/shine.png" alt="Puzzle Rumah Adat Image">
+    </div>
+
+    <!-- Right Column: Menu -->
+    <div class="menu-container">
+      <!-- Edukasi Button -->
+      <a href="edukasi.html" class="btn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v6m0 4v.01"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path>
+        </svg>
+        Edukasi
+      </a>
+
+      <!-- Quiz Button -->
+      <a href="cara-bermain.html" class="btn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75l7.5 4.5-7.5 4.5V6.75z"></path>
+        </svg>
+        Quiz
+      </a>
+
+      <!-- Keluar Button -->
+      <a href="keluar.html" class="btn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+        Keluar
+      </a>
+    </div>
   </div>
-</div>
 
-
-  <!-- Tombol 'Sound' di pojok kiri bawah -->
-  <button id="soundButton" class="corner-card absolute bottom-4 left-4">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l6 6M12 3l-6 6M12 21l6-6M12 21l-6-6" />
+  <!-- Suara Button in bottom-right corner -->
+  <button id="suara-btn" class="suara-btn">
+    <svg id="suara-icon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 18V6l7 6-7 6z"></path>
     </svg>
-    <span class="ml-2 text-sm font-bold">Sound</span>
   </button>
 
-  <audio id="backgroundAudio" src="music.mp3"></audio>
+  <!-- Audio file -->
+  <audio id="audio" src="music.mp3"></audio>
+
+  <script>
+    const suaraBtn = document.getElementById('suara-btn');
+    const suaraIcon = document.getElementById('suara-icon');
+    const audio = document.getElementById('audio');
+
+    let isPlaying = false;
+
+    suaraBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        suaraIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 18V6l7 6-7 6z"></path>
+        `;
+      } else {
+        audio.play();
+        suaraIcon.innerHTML = `
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        `;
+      }
+      isPlaying = !isPlaying;
+    });
+  </script>
 
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
-
-    const soundButton = document.getElementById('soundButton');
-    const audio = document.getElementById('backgroundAudio');
-
-    soundButton.addEventListener('click', () => {
-      if (audio.paused) {
-        audio.play();
-        soundButton.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 6h12v12H6z" />
-          </svg>
-          <span class="ml-2 text-sm font-bold">Sound Off</span>`;
-      } else {
-        audio.pause();
-        soundButton.innerHTML = `
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l6 6M12 3l-6 6M12 21l6-6M12 21l-6-6" />
-          </svg>
-          <span class="ml-2 text-sm font-bold">Sound On</span>`;
-      }
-    });
   </script>
 </body>
 </html>
