@@ -7,9 +7,10 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <style>
-    body {
-      background: linear-gradient(135deg, #1e3c72, #2a5298); /* Modern blue gradient */
+   body {
+    background: linear-gradient(135deg, #1e90ff, #ff7f50); /* Brighter pink gradient */
       color: white;
+      font-family: 'Comic Sans MS', sans-serif; /* Kid-friendly font */
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -21,91 +22,92 @@
       background-color: white;
       color: black;
       padding: 1rem;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
       display: flex;
       align-items: center;
       justify-content: center;
       transform: scale(1);
       transition: all 0.3s ease;
     }
-    
+
     .corner-card:hover {
-      transform: scale(1.05);
-      background-color: #f0f0f0;
+      transform: scale(1.1);
+      background-color: #ffedf3;
     }
-    
+
     .btn {
-      background-color: #2563eb;
+      background-color: #ff577f;
       color: white;
       font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      border-radius: 50px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
     }
-    
+
     .btn:hover {
       transform: scale(1.05);
-      background-color: #1d4ed8;
+      background-color: #e04e6d;
     }
-    
+
     .quiz-container {
       background-color: white;
       padding: 2rem;
       border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
       width: 100%;
       max-width: 30rem;
       color: black;
     }
-    
+
     .question {
       margin-bottom: 1rem;
       text-align: left;
-      color: #374151;
+      color: #333;
     }
-    
+
     .result {
-      background-color: #10b981;
+      background-color: #1f2937;
       color: white;
       padding: 1.5rem;
       border-radius: 0.75rem;
       text-align: center;
       margin-top: 2rem;
     }
+
     .navbar {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            background-color: #2a5298;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        }
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      background-color: #ff7eb3;
+      color: white;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-        .navbar a {
-            text-align: center;
-            font-size: 14px;
-            text-decoration: none;
-            color: white;
-            flex-grow: 1;
-            padding: 10px 0;
-        }
+    .navbar a {
+      text-align: center;
+      font-size: 16px;
+      text-decoration: none;
+      color: white;
+      flex-grow: 1;
+      padding: 10px 0;
+    }
 
-        .navbar a:hover {
-            background-color: #1e3c72;
-        }
+    .navbar a:hover {
+      background-color: #ff577f;
+    }
 
-        .navbar svg {
-            display: block;
-            margin: 0 auto 4px;
-            width: 24px;
-            height: 24px;
-        }
+    .navbar svg {
+      display: block;
+      margin: 0 auto 4px;
+      width: 24px;
+      height: 24px;
+    }
   </style>
 </head>
 <body class="animate__animated animate__fadeIn">
@@ -125,44 +127,95 @@
     <div id="quiz-container" class="space-y-6">
       <!-- Soal 1 -->
       <div class="question hidden" id="question-1">
-        <p class="text-lg font-semibold">1. Rumah adat Toraja dikenal dengan nama?</p>
-        <label class="block"><input type="radio" name="q1" value="Tongkonan" class="mr-2"> Tongkonan</label>
-        <label class="block"><input type="radio" name="q1" value="Joglo" class="mr-2"> Joglo</label>
+        <p class="text-lg font-semibold">1. Apa nama rumah adat dari Papua?</p>
         <label class="block"><input type="radio" name="q1" value="Rumah Gadang" class="mr-2"> Rumah Gadang</label>
+        <label class="block"><input type="radio" name="q1" value="Tongkonan" class="mr-2"> Tongkonan</label>
+        <label class="block"><input type="radio" name="q1" value="Rumah Honai" class="mr-2"> Rumah Honai</label>
+        <label class="block"><input type="radio" name="q1" value="Rumah Limas" class="mr-2"> Rumah Limas</label>
       </div>
-
+    
       <!-- Soal 2 -->
       <div class="question hidden" id="question-2">
-        <p class="text-lg font-semibold">2. Rumah adat Joglo berasal dari?</p>
-        <label class="block"><input type="radio" name="q2" value="Jawa Tengah" class="mr-2"> Jawa Tengah</label>
-        <label class="block"><input type="radio" name="q2" value="Sumatera Barat" class="mr-2"> Sumatera Barat</label>
-        <label class="block"><input type="radio" name="q2" value="Sulawesi Selatan" class="mr-2"> Sulawesi Selatan</label>
+        <p class="text-lg font-semibold">2. Rumah adat Rumoh Aceh berasal dari daerah mana?</p>
+        <label class="block"><input type="radio" name="q2" value="Sumatera" class="mr-2"> Sumatera</label>
+        <label class="block"><input type="radio" name="q2" value="Aceh" class="mr-2"> Aceh</label>
+        <label class="block"><input type="radio" name="q2" value="Lampung" class="mr-2"> Lampung</label>
+        <label class="block"><input type="radio" name="q2" value="Papua" class="mr-2"> Papua</label>
       </div>
-
+    
       <!-- Soal 3 -->
       <div class="question hidden" id="question-3">
-        <p class="text-lg font-semibold">3. Rumah adat Minangkabau disebut?</p>
-        <label class="block"><input type="radio" name="q3" value="Tongkonan" class="mr-2"> Tongkonan</label>
-        <label class="block"><input type="radio" name="q3" value="Rumah Gadang" class="mr-2"> Rumah Gadang</label>
-        <label class="block"><input type="radio" name="q3" value="Joglo" class="mr-2"> Joglo</label>
+        <p class="text-lg font-semibold">3. Bagaimana ciri khas dari rumah adat Baduy?</p>
+        <label class="block"><input type="radio" name="q3" value="Atap melengkung seperti tanduk kerbau" class="mr-2"> Atap melengkung seperti tanduk kerbau</label>
+        <label class="block"><input type="radio" name="q3" value="Bangunan rumah sangat mewah" class="mr-2"> Bangunan rumah sangat mewah</label>
+        <label class="block"><input type="radio" name="q3" value="Terbuat dari kayu dan bambu" class="mr-2"> Terbuat dari kayu dan bambu</label>
+        <label class="block"><input type="radio" name="q3" value="Gaya bangunan rumah sangat sederhana" class="mr-2"> Gaya bangunan rumah sangat sederhana</label>
       </div>
-
+    
       <!-- Soal 4 -->
       <div class="question hidden" id="question-4">
-        <p class="text-lg font-semibold">4. Rumah adat dari Bali disebut?</p>
-        <label class="block"><input type="radio" name="q4" value="Tongkonan" class="mr-2"> Tongkonan</label>
-        <label class="block"><input type="radio" name="q4" value="Joglo" class="mr-2"> Joglo</label>
-        <label class="block"><input type="radio" name="q4" value="Bale" class="mr-2"> Bale</label>
+        <p class="text-lg font-semibold">4. Rumah adat yang terbuat dari kayu jati dan atapnya seperti membentuk sebuah gunung adalah ciri khas dari rumah adat?</p>
+        <label class="block"><input type="radio" name="q4" value="Rumah Badui" class="mr-2"> Rumah Badui</label>
+        <label class="block"><input type="radio" name="q4" value="Rumah Joglo" class="mr-2"> Rumah Joglo</label>
+        <label class="block"><input type="radio" name="q4" value="Rumah Tongkonan" class="mr-2"> Rumah Tongkonan</label>
+        <label class="block"><input type="radio" name="q4" value="Rumah Banjar" class="mr-2"> Rumah Banjar</label>
       </div>
-
+    
       <!-- Soal 5 -->
       <div class="question hidden" id="question-5">
-        <p class="text-lg font-semibold">5. Rumah adat Sumatera Utara dikenal dengan nama?</p>
-        <label class="block"><input type="radio" name="q5" value="Bolon" class="mr-2"> Bolon</label>
-        <label class="block"><input type="radio" name="q5" value="Joglo" class="mr-2"> Joglo</label>
-        <label class="block"><input type="radio" name="q5" value="Bale" class="mr-2"> Bale</label>
+        <p class="text-lg font-semibold">5. Rumah Adat Nuwou Sesat berasal dari daerah?</p>
+        <label class="block"><input type="radio" name="q5" value="Kalimantan Barat" class="mr-2"> Kalimantan Barat</label>
+        <label class="block"><input type="radio" name="q5" value="Kalimantan Selatan" class="mr-2"> Kalimantan Selatan</label>
+        <label class="block"><input type="radio" name="q5" value="Lampung" class="mr-2"> Lampung</label>
+        <label class="block"><input type="radio" name="q5" value="Kalimantan Timur" class="mr-2"> Kalimantan Timur</label>
+      </div>
+    
+      <!-- Soal 6 -->
+      <div class="question hidden" id="question-6">
+        <p class="text-lg font-semibold">6. Rumah tradisional yang berbentuk panggung dengan tiang-tiang kayu tinggi adalah ciri khas rumah adat dari?</p>
+        <label class="block"><input type="radio" name="q6" value="Sumatera Selatan" class="mr-2"> Sumatera Selatan</label>
+        <label class="block"><input type="radio" name="q6" value="Kalimantan Barat" class="mr-2"> Kalimantan Barat</label>
+        <label class="block"><input type="radio" name="q6" value="Sulawesi Selatan" class="mr-2"> Sulawesi Selatan</label>
+        <label class="block"><input type="radio" name="q6" value="Aceh" class="mr-2"> Aceh</label>
+      </div>
+    
+      <!-- Soal 7 -->
+      <div class="question hidden" id="question-7">
+        <p class="text-lg font-semibold">7. Rumah adat Bali dikenal dengan nama?</p>
+        <label class="block"><input type="radio" name="q7" value="Rumah Gapura Candi Bentar" class="mr-2"> Rumah Gapura Candi Bentar</label>
+        <label class="block"><input type="radio" name="q7" value="Rumah Gadang" class="mr-2"> Rumah Gadang</label>
+        <label class="block"><input type="radio" name="q7" value="Rumah Tongkonan" class="mr-2"> Rumah Tongkonan</label>
+        <label class="block"><input type="radio" name="q7" value="Rumah Honai" class="mr-2"> Rumah Honai</label>
+      </div>
+    
+      <!-- Soal 8 -->
+      <div class="question hidden" id="question-8">
+        <p class="text-lg font-semibold">8. Apa nama rumah adat dari kota Ambon Maluku?</p>
+        <label class="block"><input type="radio" name="q8" value="Rumah Badui" class="mr-2"> Rumah Badui</label>
+        <label class="block"><input type="radio" name="q8" value="Rumah Baileo" class="mr-2"> Rumah Baileo</label>
+        <label class="block"><input type="radio" name="q8" value="Rumah Baduy" class="mr-2"> Rumah Baduy</label>
+        <label class="block"><input type="radio" name="q8" value="Rumah Joglo" class="mr-2"> Rumah Joglo</label>
+      </div>
+    
+      <!-- Soal 9 -->
+      <div class="question hidden" id="question-9">
+        <p class="text-lg font-semibold">9. Rumah adat yang terdapat ukiran khas daerah pesisir adalah khas rumah dari?</p>
+        <label class="block"><input type="radio" name="q9" value="Rumah Krongbade" class="mr-2"> Rumah Krongbade</label>
+        <label class="block"><input type="radio" name="q9" value="Rumah Kakiseribu" class="mr-2"> Rumah Kakiseribu</label>
+        <label class="block"><input type="radio" name="q9" value="Rumah Baloy" class="mr-2"> Rumah Baloy</label>
+        <label class="block"><input type="radio" name="q9" value="Rumah Istana Kesultanan" class="mr-2"> Rumah Istana Kesultanan</label>
+      </div>
+    
+      <!-- Soal 10 -->
+      <div class="question hidden" id="question-10">
+        <p class="text-lg font-semibold">10. Rumah Dulohupa berasal dari daerah?</p>
+        <label class="block"><input type="radio" name="q10" value="Lampung" class="mr-2"> Lampung</label>
+        <label class="block"><input type="radio" name="q10" value="Bali" class="mr-2"> Bali</label>
+        <label class="block"><input type="radio" name="q10" value="Jakarta" class="mr-2"> Jakarta</label>
+        <label class="block"><input type="radio" name="q10" value="Gorontalo" class="mr-2"> Gorontalo</label>
       </div>
     </div>
+    
 
     <!-- Navigasi Soal -->
     <div class="mt-8 flex justify-between">
@@ -218,11 +271,16 @@
 
     function submitQuiz() {
       const answers = {
-        q1: 'Tongkonan',
-        q2: 'Jawa Tengah',
-        q3: 'Rumah Gadang',
-        q4: 'Bale',
-        q5: 'Bolon'
+        q1: 'Rumah Honai',         // Correct answer for question 1
+    q2: 'Aceh',                // Correct answer for question 2
+    q3: 'Terbuat dari kayu dan bambu', // Correct answer for question 3
+    q4: 'Rumah Joglo',         // Correct answer for question 4
+    q5: 'Lampung',             // Correct answer for question 5
+    q6: 'Sulawesi Selatan',    // Correct answer for question 6
+    q7: 'Rumah Gapura Candi Bentar', // Correct answer for question 7
+    q8: 'Rumah Baileo',        // Correct answer for question 8
+    q9: 'Rumah Baloy',         // Correct answer for question 9
+    q10: 'Gorontalo'           // Correct answer for question 10
       };
       let score = 0;
       let correctAnswers = [];
@@ -236,9 +294,7 @@
       }
 
       document.getElementById('result').innerHTML = `
-        <h2 class="text-2xl font-bold">Skor Anda: ${score}/5</h2>
-        <p class="mt-4">Jawaban yang benar:</p>
-        <ul class="mt-2 list-disc list-inside">${correctAnswers.map(answer => `<li>${answer}</li>`).join('')}</ul>
+        <h2 class="text-2xl font-bold">Skor Anda: ${score}/10</h2>
       `;
       document.getElementById('result').classList.remove('hidden');
       document.getElementById('quiz-container').classList.add('hidden');
