@@ -3,32 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Materi Rumah Adat Nusantara</title>
+  <title>Rumah Adat Slider</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <style>
-    body {
-      background: linear-gradient(135deg, #1e90ff, #ff7f50); /* Colorful gradient for kids */
+     body {
+      background: linear-gradient(135deg, #1e90ff, #ff7f50);
       color: white;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
       padding: 1rem;
-      font-family: 'Comic Sans MS', cursive, sans-serif; /* Fun font for kids */
+      font-family: 'Comic Sans MS', cursive, sans-serif;
     }
 
-    .card-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
       width: 100%;
-      max-width: 500px;
+      max-width: 600px;
+      justify-content: center;
     }
 
     .card {
-      background-color: #ffeb3b; /* Bright yellow for cards */
+      background-color: #ffeb3b;
       color: #333;
       padding: 0.75rem;
       border-radius: 0.5rem;
@@ -37,11 +39,12 @@
       cursor: pointer;
       transition: transform 0.3s ease, background-color 0.3s ease;
       font-size: 0.875rem;
+      flex: 1 1 120px;
     }
 
     .card:hover {
       transform: scale(1.1);
-      background-color: #ffca28; /* Slightly darker yellow on hover */
+      background-color: #ffca28;
     }
 
     .modal {
@@ -117,61 +120,196 @@
       width: 24px;
       height: 24px;
     }
+
+    .back-btn {
+      position: fixed;
+      left: 1rem;
+      bottom: 1rem;
+      background-color: #2b6cb0;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background-color: #2b6cb0;
+    }
+
+    .swiper-container {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    
+  /* Optional: Adjust card styling */
+  .card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    width: 100%;
+    margin: 10px 0;
+  }
+    .slider-container {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+    .slide {
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      cursor: pointer;
+    }
+    /* Arrow styles */
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .arrow-btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    .prev {
+      left: 10px;
+    }
+    .next {
+      right: 10px;
+    }
+    /* Custom card styles */
+    .card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 80%;
+      text-align: center;
+      font-size: 1.5rem;
+      color: black;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    /* Modal styles */
+    #infoModal {
+      display: none;
+      position: fixed;
+      z-index: 20;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    #modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      text-align: left;
+      color: black;
+    }
   </style>
 </head>
-<body class="animate__animated animate__fadeIn">
+<body class="bg-blue-500 text-white">
+  <!-- Slider Container -->
+  <div class="flex justify-center items-center h-screen">
 
-  <!-- Card Logo di pojok kanan atas -->
-  <a href="tentang.html" class="corner-card absolute top-4 right-4">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l6 6M12 3l-6 6M12 21l6-6M12 21l-6-6" />
-    </svg>
-    <span class="ml-2 text-sm font-bold">Tentang</span>
-  </a>
-
-  <!-- Konten Utama -->
-  <div class="content-container text-center animate__animated animate__fadeInUp">
-    <h1 class="text-3xl font-bold text-white mb-6">Mengenal Rumah Adat Nusantara</h1>
-    <p class="text-base">
-      Indonesia adalah negara kepulauan yang kaya akan budaya, termasuk rumah adat yang mencerminkan kearifan lokal dan kondisi alam setiap daerah.
-    </p>
-
-    <!-- Daftar Rumah Adat -->
-    <div class="card-list mt-6">
-      <div class="card" onclick="showInfo('Banten')">Banten</div>
-      <div class="card" onclick="showInfo('DKI Jakarta')">DKI Jakarta</div>
-      <div class="card" onclick="showInfo('Jawa Barat')">Jawa Barat</div>
-      <div class="card" onclick="showInfo('Jawa Tengah')">Jawa Tengah</div>
-      <div class="card" onclick="showInfo('DIY')">D.I Yogyakarta</div>
-    </div>
-  </div>
-
-  <!-- Modal Pop-Up -->
-  <div id="infoModal" class="modal">
-    <div class="modal-content animate__animated animate__fadeInDown">
-      <span id="closeModal" class="close-btn float-right">Close</span>
-      <div id="info-container" class="mt-4">
-        <!-- Info rumah adat akan muncul di sini -->
+    <div class="slider-container w-2/3 bg-white rounded-lg shadow-lg text-black">
+      <!-- Previous Button -->
+      <div id="prev" class="arrow-btn prev">&larr;</div>
+      
+      <div id="slider" class="slider">
+        <!-- Slide 1: Rumah Adat Banten -->
+        <div class="slide" onclick="showInfo('Banten')">
+          <div class="card">Rumah Adat Banten</div>
+        </div>
+        <!-- Slide 2: Rumah Adat DKI Jakarta -->
+        <div class="slide" onclick="showInfo('DKI Jakarta')">
+          <div class="card">Rumah Adat DKI Jakarta</div>
+        </div>
+        <!-- Slide 3: Rumah Adat Jawa Barat -->
+        <div class="slide" onclick="showInfo('Jawa Barat')">
+          <div class="card">Rumah Adat Jawa Barat</div>
+        </div>
+        <!-- Slide 4: Rumah Adat Jawa Tengah -->
+        <div class="slide" onclick="showInfo('Jawa Tengah')">
+          <div class="card">Rumah Adat Jawa Tengah</div>
+        </div>
+        <!-- Slide 5: Rumah Adat DIY -->
+        <div class="slide" onclick="showInfo('DIY')">
+          <div class="card">Rumah Adat DIY</div>
+        </div>
       </div>
+      
+      <!-- Next Button -->
+      <div id="next" class="arrow-btn next">&rarr;</div>
     </div>
   </div>
 
-  <!-- Navigasi -->
-  <div class="navbar">
-    <a href="index.html">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 9v-8a2 2 0 012-2h4a2 2 0 012 2v8m-6-6h.01" />
-      </svg>
-      Home
-    </a>
-    <a href="#back">
-      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-      Back
-    </a>
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">Kembali</a>
+  <!-- Modal -->
+  <div id="infoModal" class="flex">
+    <div id="modal-content">
+      <div id="info-container"></div>
+      <button id="closeModal" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Close</button>
+    </div>
   </div>
 
+  <!-- Script to handle slider functionality -->
+  <script>
+    const slider = document.getElementById('slider');
+    const totalSlides = slider.children.length;
+    let currentIndex = 0;
+
+    document.getElementById('next').addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      updateSlider();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+      updateSlider();
+    });
+
+    function updateSlider() {
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  </script>
+
+  <!-- Script for modal and info content -->
   <script>
     const infoModal = document.getElementById('infoModal');
     const infoContainer = document.getElementById('info-container');
@@ -183,34 +321,37 @@
         case 'Banten':
           content = `
             <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Banten: Sulah Nyanda</h2>
-            <p>Suku asli yang tinggal di Provinsi Banten adalah suku Badui. Suku ini memiliki rumah adat bernama sulah nyanda. Rumah tradisional ini menyatu dengan alam karena bahan-bahannya berasal dari alam. Alas pondasinya terbuat dari batu, lantainya dari bambu yang dibelah, dindingnya terbuat dari anyaman bambu, tiangnya dari balok kayu berukuran besar, dan atapnya dibuat dari bilah bambu dan ijuk.</p><br />
-            <a href="puzzle-baduy.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Banten</a>`;
+            <p>Suku asli yang tinggal di Provinsi Banten adalah suku Badui. Suku ini memiliki rumah adat bernama sulah nyanda. Rumah tradisional ini menyatu dengan alam karena bahan-bahannya berasal dari alam. Alas pondasinya terbuat dari batu, lantainya dari bambu yang dibelah, dindingnya terbuat dari anyaman bambu, tiangnya dari balok kayu berukuran besar, dan atapnya dibuat dari bilah bambu dan ijuk.</p>
+          `;
           break;
         case 'DKI Jakarta':
           content = `
             <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DKI Jakarta: Kebaya</h2>
-            <p>Rumah adat Provinsi DKI Jakarta disebut dengan rumah kebaya. Rumah ini adalah ciri khas suku Betawi. Atap rumah kebaya berbentuk pelana yang dilipat. Jika dilihat dari samping, atapnya seperti lipatan kebaya. Di teras rumah biasanya tersedia meja dan kursi yang digunakan sebagai tempat bersantai dan menerima tamu. Ciri khas lain dari rumah adat ini adalah penggunaan pagar yang mengelilingi rumah.</p><br />
-            <a href="puzzle-jakarta.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Jakarta</a>`;
+            <p>Rumah adat ini disebut rumah kebaya karena bentuk atapnya yang menyerupai pelana terlipat, layaknya lipatan kebaya. Salah satu ciri khas rumah adat ini adalah teras yang luas. Biasanya teras ini digunakan untuk bersantai dan menerima tamu. Luasnya teras rumah adat Betawi menunjukkan sifat kekeluargaan yang erat dari masyarakat Betawi.</p>
+          `;
           break;
         case 'Jawa Barat':
           content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Barat: Julang Ngapak</h2>
-            <p>Rumah tradisional Jawa Barat adalah rumah Julang Ngapak yang mencerminkan ciri khas suku Sunda. Nama julang ngapak ini menggambarkan bentuk atap rumahnya yang menyerupai sayap burung yang sedang mengepak. Konstruksi rumah julang ngapak sederhana, namun sangat fungsional dan memiliki makna filosofis yang mendalam.</p><br />
-            <a href="puzzle.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Jawa Barat</a>`;
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Barat: Imah Gede</h2>
+            <p>Rumah adat Sunda disebut Imah Gede. Bentuknya sederhana, menggunakan material alami dari bambu, kayu, dan ijuk. Rumah ini terkenal dengan desain tradisional yang masih digunakan oleh masyarakat suku Sunda di Jawa Barat.</p>
+          `;
           break;
         case 'Jawa Tengah':
           content = `
             <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Tengah: Joglo</h2>
-            <p>Rumah joglo adalah rumah tradisional yang menjadi identitas budaya Jawa Tengah. Rumah ini dibangun dengan bahan utama kayu jati yang berkualitas. Bagian utama rumah disebut pendopo yang berfungsi sebagai tempat menerima tamu. Filosofi rumah joglo adalah sebagai simbol keterbukaan dan kerendahan hati masyarakat Jawa Tengah.</p> <br />
-            <a href="puzzle-jateng.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Jawa Tengah</a>`;
+            <p>Rumah adat Joglo merupakan rumah tradisional masyarakat Jawa. Bentuk rumah ini sangat unik dengan atap berbentuk limas yang mencerminkan kemewahan dan status sosial.</p>
+          `;
           break;
         case 'DIY':
           content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DIY: Joglo</h2>
-            <p>Rumah joglo dari Yogyakarta memiliki sedikit perbedaan dengan rumah joglo Jawa Tengah. Rumah ini memiliki makna filosofis yang dalam, mencerminkan keharmonisan antara manusia, alam, dan Tuhan. Rumah joglo Yogyakarta juga sering digunakan untuk berbagai upacara adat dan kegiatan kebudayaan.</p><br />
-            <a href="puzzle-diy.html" class="bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 mb-4">Mainkan Puzzle Rumah Adat Yogyakarta</a>`;
+            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DIY: Bangsal Kencono</h2>
+            <p>Rumah tradisional Bangsal Kencono digunakan oleh keraton Yogyakarta. Rumah ini mencerminkan kekuasaan dan kemegahan keraton dengan ukiran tradisional yang indah.</p>
+          `;
           break;
+        default:
+          content = `<p>Informasi tidak tersedia.</p>`;
       }
+
       infoContainer.innerHTML = content;
       infoModal.style.display = 'flex';
     }
@@ -225,6 +366,5 @@
       }
     }
   </script>
-
 </body>
 </html>
