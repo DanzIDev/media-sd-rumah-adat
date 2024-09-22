@@ -97,6 +97,20 @@
       width: 24px;
       height: 24px;
     }
+
+    .popup-warning {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      z-index: 9999;
+    }
+
   </style>
 </head>
 <body>
@@ -133,12 +147,12 @@
       </a>
 
       <!-- Keluar Button -->
-      <a href="keluar.html" class="btn">
+      <button id="keluar-btn" class="btn">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
         </svg>
         Keluar
-      </a>
+      </button>
     </div>
   </div>
 
@@ -149,6 +163,11 @@
     </svg>
   </button>
 
+  <!-- Popup Warning -->
+  <div id="popup-warning" class="popup-warning">
+    Klik kembali 2x untuk keluar.
+  </div>
+
   <!-- Audio file -->
   <audio id="audio" src="music.mp3"></audio>
 
@@ -158,6 +177,7 @@
     const audio = document.getElementById('audio');
 
     let isPlaying = false;
+    let exitClickedOnce = false;
 
     suaraBtn.addEventListener('click', () => {
       if (isPlaying) {
@@ -172,6 +192,23 @@
         `;
       }
       isPlaying = !isPlaying;
+    });
+
+    // Handle exit button
+    const keluarBtn = document.getElementById('keluar-btn');
+    const popupWarning = document.getElementById('popup-warning');
+
+    keluarBtn.addEventListener('click', () => {
+      if (exitClickedOnce) {
+        window.location.href = "keluar.html"; // Redirect after second click
+      } else {
+        exitClickedOnce = true;
+        popupWarning.style.display = 'block';
+        setTimeout(() => {
+          exitClickedOnce = false;
+          popupWarning.style.display = 'none';
+        }, 2000); // Reset the state after 2 seconds
+      }
     });
   </script>
 
