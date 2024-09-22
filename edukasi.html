@@ -1,44 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rumah Adat Slider</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
-     body {
+    body {
       background: linear-gradient(135deg, #1e90ff, #ff7f50);
       color: white;
       min-height: 100vh;
       display: flex;
       justify-content: center;
       padding: 1rem;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-family: 'Poppins', sans-serif; /* Updated font */
     }
 
     .card-container {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      width: 100%;
-      max-width: 600px;
       justify-content: center;
+      max-width: 600px;
     }
 
     .card {
       background-color: #ffeb3b;
       color: #333;
-      padding: 0.75rem;
+      padding: 1rem;
       border-radius: 0.5rem;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
       cursor: pointer;
       transition: transform 0.3s ease, background-color 0.3s ease;
-      font-size: 0.875rem;
+      font-size: 1rem;
       flex: 1 1 120px;
     }
 
@@ -88,37 +85,48 @@
       background-color: #c53030;
     }
 
-    .navbar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px 0;
-      background-color: #2a5298;
-      color: white;
-      position: fixed;
-      bottom: 0;
+    .slider-container {
+      overflow: hidden;
       width: 100%;
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
-    .navbar a {
-      text-align: center;
-      font-size: 14px;
-      text-decoration: none;
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      cursor: pointer;
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
       color: white;
-      flex-grow: 1;
-      padding: 10px 0;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
     }
 
-    .navbar a:hover {
-      background-color: #1e3c72;
+    .arrow-btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
     }
 
-    .navbar svg {
-      display: block;
-      margin: 0 auto 4px;
-      width: 24px;
-      height: 24px;
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
     }
 
     .back-btn {
@@ -137,234 +145,142 @@
     .back-btn:hover {
       background-color: #2b6cb0;
     }
-
-    .swiper-container {
-      width: 100%;
-      max-width: 600px;
-      height: auto;
-    }
-
-    .swiper-slide {
-      text-align: center;
-      font-size: 18px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-    }
-    
-  /* Optional: Adjust card styling */
-  .card {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    width: 100%;
-    margin: 10px 0;
-  }
-    .slider-container {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
-    }
-    .slider {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-    .slide {
-      min-width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 150px;
-      cursor: pointer;
-    }
-    /* Arrow styles */
-    .arrow-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0, 0, 0, 0.5);
-      color: white;
-      padding: 10px;
-      border-radius: 50%;
-      cursor: pointer;
-      z-index: 10;
-    }
-    .arrow-btn:hover {
-      background-color: rgba(0, 0, 0, 0.7);
-    }
-    .prev {
-      left: 10px;
-    }
-    .next {
-      right: 10px;
-    }
-    /* Custom card styles */
-    .card {
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      width: 80%;
-      text-align: center;
-      font-size: 1.5rem;
-      color: black;
-      transition: transform 0.3s ease;
-    }
-    .card:hover {
-      transform: scale(1.05);
-    }
-    /* Modal styles */
-    #infoModal {
-      display: none;
-      position: fixed;
-      z-index: 20;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-    }
-    #modal-content {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 600px;
-      text-align: left;
-      color: black;
-    }
   </style>
 </head>
-<body class="bg-blue-500 text-white">
-  <!-- Slider Container -->
-  <div class="flex justify-center items-center h-screen">
 
-    <div class="slider-container w-2/3 bg-white rounded-lg shadow-lg text-black">
-      <!-- Previous Button -->
-      <div id="prev" class="arrow-btn prev">&larr;</div>
-      
-      <div id="slider" class="slider">
-        <!-- Slide 1: Rumah Adat Banten -->
-        <div class="slide" onclick="showInfo('Banten')">
-          <div class="card">Rumah Adat Banten</div>
-        </div>
-        <!-- Slide 2: Rumah Adat DKI Jakarta -->
-        <div class="slide" onclick="showInfo('DKI Jakarta')">
-          <div class="card">Rumah Adat DKI Jakarta</div>
-        </div>
-        <!-- Slide 3: Rumah Adat Jawa Barat -->
-        <div class="slide" onclick="showInfo('Jawa Barat')">
-          <div class="card">Rumah Adat Jawa Barat</div>
-        </div>
-        <!-- Slide 4: Rumah Adat Jawa Tengah -->
-        <div class="slide" onclick="showInfo('Jawa Tengah')">
-          <div class="card">Rumah Adat Jawa Tengah</div>
-        </div>
-        <!-- Slide 5: Rumah Adat DIY -->
-        <div class="slide" onclick="showInfo('DIY')">
-          <div class="card">Rumah Adat DIY</div>
-        </div>
-      </div>
-      
-      <!-- Next Button -->
-      <div id="next" class="arrow-btn next">&rarr;</div>
+<body>
+  <!-- Pulau Selection -->
+  <div id="pulauSelection" class="flex flex-col items-center justify-center h-screen">
+    <h1 class="text-2xl mb-4">Pilih Pulau</h1>
+    <div class="card-container">
+      <div class="card" onclick="showRumahAdat('Jawa')">Pulau Jawa</div>
+      <div class="card" onclick="showRumahAdat('Sumatera')">Pulau Sumatera</div>
+      <div class="card" onclick="showRumahAdat('Sulawesi')">Pulau Sulawesi</div>
+      <div class="card" onclick="showRumahAdat('Kalimantan')">Pulau Kalimantan</div>
+      <div class="card" onclick="showRumahAdat('Bali')">Pulau Bali</div>
+      <div class="card" onclick="showRumahAdat('Papua')">Pulau Papua</div>
+      <div class="card" onclick="showRumahAdat('Maluku')">Kepulauan Maluku</div>
+      <div class="card" onclick="showRumahAdat('Nusa Tenggara')">Kepulauan Nusa Tenggara</div>
     </div>
   </div>
+  <a href="index.html" class="back-btn">Back</a>
+<!-- Slider Container -->
+<div class="slider-container hidden bg-cover bg-center h-40 bg-blue-500" id="sliderContainer" style="background-image: url('your-image-url.jpg');">
+  <div id="prev" class="arrow-btn prev">&larr;</div>
+  <div id="slider" class="slider">
+    <!-- Dynamic Slides will be injected here -->
+  </div>
+  <div id="next" class="arrow-btn next">&rarr;</div>
+  <button id="backToPulauSelection" class="back-btn">Kembali ke Pilih Pulau</button>
+</div>
 
-    <!-- Back Button -->
-    <a href="index.html" class="back-btn">Kembali</a>
+
+
   <!-- Modal -->
-  <div id="infoModal" class="flex">
-    <div id="modal-content">
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
       <div id="info-container"></div>
-      <button id="closeModal" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Close</button>
+      <button id="closeModal" class="close-btn">Close</button>
     </div>
   </div>
 
-  <!-- Script to handle slider functionality -->
+  <!-- Script -->
   <script>
-    const slider = document.getElementById('slider');
-    const totalSlides = slider.children.length;
-    let currentIndex = 0;
+    const rumahAdatData = {
+      Jawa: [
+        { name: 'Rumah Badui', info: 'Gaya bangunan rumah sangat sederhana, Batu kali digunakan sebagai penahan tanah agar tidak longsor, Jenis rumah panggung.' },
+        { name: 'Rumah Kebaya', info: 'Pondasi rumah terbuat dari susunan batu alam, Dinding terbuat dari kayu nangka, Atap seperti lipatan kebaya.' },
+        { name: 'Rumah Joglo', info: 'Balok yang letaknya paling atas, dianggap "kepala" bangunan, Memiliki 4 pilar penyangga, Jenis rumah joglo atau pendopo.' }
+      ],
+      Sumatera: [
+        { name: 'Rumah KrongBade', info: 'Ruang bawah sebagai penyimpanan bahan pangan. Ruang bawah sebagai aktivitas menenun kain. Jenis rumah panggung.' },
+        { name: 'Rumah Selaso Jatuh Kembar', info: 'Keseluruhan dibuat dari bahan alam. Hiasan dan bangunan mirip perahu. Difungsikan sebagai balai pertemuan adat.' },
+        { name: 'Rumah Nuwou Sesat', info: 'Atap terbuat dari ilalang/kayu. Umumnya dibuat dekat dengan sungai. Fungsi utama sebagai tempat pertemuan.' }
+      ],
+      Sulawesi: [
+        { name: 'Rumah Dulohupa', info: 'Kata Dulohupa berarti mufakat. Pilar kayu sebagai hiasan dan lambang. Jenis rumah panggung.' },
+        { name: 'Rumah Pewaris', info: 'Secara keseluruhan terbuat dari kayu ulin. Memiliki ukiran-ukiran pada bagian rumah. Jenis rumah panggung.' },
+        { name: 'Rumah Tongkonan', info: 'Bahan tidak memiliki unsur logam. Atap dibuat dari injuk atau rumbia. Atap berbentuk perahu terbalik.' }
+      ],
+      Kalimantan: [
+        { name: 'Rumah Baloy', info: 'Bahan keseluruhan terbuat dari kayu ulin. Terdapat ukiran khas daerah pesisir. Jenis rumah panggung.' },
+        { name: 'Rumah Istana Kesultanan', info: 'Terbuat murni dari kayu. Arsitektur memadukan unsur melayu dan islam. Warna dinding putih dan warna atap coklat gelap.' },
+        { name: 'Rumah Bubungan Tinggi', info: 'Bentuk atap bagian tengah tinggi dan lancip. Tangga naik selalu memiliki jumlah ganjil. Diluar rumah terdapat pagar keliling.' }
+      ],
+      Bali: [
+        { name: 'Rumah KrongBade', info: 'Gapura atau gerbang didesain seperti candi. Disebut gerbang terbelah. Terdapat patung di sekitar gapura.' }
+      ],
+      Papua: [
+        { name: 'Rumah Honai', info: 'Atap terbentuk kerucut dari jerami. Lantai beralaskan tanah. Tidak memiliki jendela.' },
+        { name: 'Rumah Kaki Seribu', info: 'Atap daun jerami. Banyak tiang penopang. Jenis rumah panggung.' }
+      ],
+      Maluku: [
+        { name: 'Rumah Sasadu', info: 'Bahan alam, kayu, dan daun sagu. Berfungsi untuk tempat pertemuan adat. Berfungsi sebagai tempat tinggal adat suku sasi.' }
+      ],
+      "Nusa Tenggara": [
+        { name: 'Rumah Dalam Loka', info: 'Material rumah adalah kayu dan ijuk. Terdapat 99 tiang penopang. Lambang tahta kesultanan Sumbawa.' }
+      ]
+    };
 
-    document.getElementById('next').addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % totalSlides;
+    const sliderContainer = document.getElementById('sliderContainer');
+    const slider = document.getElementById('slider');
+    const infoModal = document.getElementById('infoModal');
+    const infoContainer = document.getElementById('info-container');
+    let currentIndex = 0;
+    let selectedPulau = '';
+
+    function showRumahAdat(pulau) {
+      selectedPulau = pulau;
+      const rumahAdat = rumahAdatData[pulau];
+      slider.innerHTML = ''; // Clear previous slides
+
+      rumahAdat.forEach(item => {
+        const slide = document.createElement('div');
+        slide.classList.add('slide');
+        slide.textContent = item.name;
+        slide.addEventListener('click', () => showInfo(item));
+        slider.appendChild(slide);
+      });
+
+      sliderContainer.classList.remove('hidden');
+      document.getElementById('pulauSelection').classList.add('hidden');
       updateSlider();
+    }
+
+    function showInfo(item) {
+      infoContainer.textContent = item.info;
+      infoModal.style.display = 'flex';
+    }
+
+    document.getElementById('closeModal').addEventListener('click', () => {
+      infoModal.style.display = 'none';
     });
 
     document.getElementById('prev').addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-      updateSlider();
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    });
+
+    document.getElementById('next').addEventListener('click', () => {
+      const totalSlides = rumahAdatData[selectedPulau].length;
+      if (currentIndex < totalSlides - 1) {
+        currentIndex++;
+        updateSlider();
+      }
     });
 
     function updateSlider() {
       slider.style.transform = `translateX(-${currentIndex * 100}%)`;
     }
-  </script>
 
-  <!-- Script for modal and info content -->
-  <script>
-    const infoModal = document.getElementById('infoModal');
-    const infoContainer = document.getElementById('info-container');
-    const closeModal = document.getElementById('closeModal');
-
-    function showInfo(region) {
-      let content = '';
-      switch (region) {
-        case 'Banten':
-          content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Banten: Sulah Nyanda</h2>
-            <p>Suku asli yang tinggal di Provinsi Banten adalah suku Badui. Suku ini memiliki rumah adat bernama sulah nyanda. Rumah tradisional ini menyatu dengan alam karena bahan-bahannya berasal dari alam. Alas pondasinya terbuat dari batu, lantainya dari bambu yang dibelah, dindingnya terbuat dari anyaman bambu, tiangnya dari balok kayu berukuran besar, dan atapnya dibuat dari bilah bambu dan ijuk.</p>
-          `;
-          break;
-        case 'DKI Jakarta':
-          content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DKI Jakarta: Kebaya</h2>
-            <p>Rumah adat ini disebut rumah kebaya karena bentuk atapnya yang menyerupai pelana terlipat, layaknya lipatan kebaya. Salah satu ciri khas rumah adat ini adalah teras yang luas. Biasanya teras ini digunakan untuk bersantai dan menerima tamu. Luasnya teras rumah adat Betawi menunjukkan sifat kekeluargaan yang erat dari masyarakat Betawi.</p>
-          `;
-          break;
-        case 'Jawa Barat':
-          content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Barat: Imah Gede</h2>
-            <p>Rumah adat Sunda disebut Imah Gede. Bentuknya sederhana, menggunakan material alami dari bambu, kayu, dan ijuk. Rumah ini terkenal dengan desain tradisional yang masih digunakan oleh masyarakat suku Sunda di Jawa Barat.</p>
-          `;
-          break;
-        case 'Jawa Tengah':
-          content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat Jawa Tengah: Joglo</h2>
-            <p>Rumah adat Joglo merupakan rumah tradisional masyarakat Jawa. Bentuk rumah ini sangat unik dengan atap berbentuk limas yang mencerminkan kemewahan dan status sosial.</p>
-          `;
-          break;
-        case 'DIY':
-          content = `
-            <h2 class="text-xl font-bold text-blue-600 mb-4">Rumah Adat DIY: Bangsal Kencono</h2>
-            <p>Rumah tradisional Bangsal Kencono digunakan oleh keraton Yogyakarta. Rumah ini mencerminkan kekuasaan dan kemegahan keraton dengan ukiran tradisional yang indah.</p>
-          `;
-          break;
-        default:
-          content = `<p>Informasi tidak tersedia.</p>`;
-      }
-
-      infoContainer.innerHTML = content;
-      infoModal.style.display = 'flex';
-    }
-
-    closeModal.onclick = function() {
-      infoModal.style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-      if (event.target == infoModal) {
-        infoModal.style.display = 'none';
-      }
-    }
+    document.getElementById('backToPulauSelection').addEventListener('click', () => {
+      sliderContainer.classList.add('hidden');
+      document.getElementById('pulauSelection').classList.remove('hidden');
+      currentIndex = 0; // Reset slider to the first slide
+    });
   </script>
 </body>
+
 </html>
