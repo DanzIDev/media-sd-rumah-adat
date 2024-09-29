@@ -232,7 +232,7 @@
     <!-- Navigasi Soal -->
     <div class="mt-8 flex justify-between">
       <button id="prev-btn" onclick="prevQuestion()" class="btn" disabled>Back</button>
-      <button id="next-btn" onclick="nextQuestion()" class="btn">Next</button>
+      <button id="next-btn" onclick="checkAnswer()" class="btn">Next</button>
     </div>
 
     <!-- Hasil Kuis -->
@@ -270,25 +270,23 @@
 
     function submitQuiz() {
       const answers = {
-        q1: 'Rumah Honai',         // Correct answer for question 1
-    q2: 'Aceh',                // Correct answer for question 2
-    q3: 'Terbuat dari kayu dan bambu', // Correct answer for question 3
-    q4: 'Rumah Joglo',         // Correct answer for question 4
-    q5: 'Lampung',             // Correct answer for question 5
-    q6: 'Sulawesi Selatan',    // Correct answer for question 6
-    q7: 'Rumah Gapura Candi Bentar', // Correct answer for question 7
-    q8: 'Rumah Baileo',        // Correct answer for question 8
-    q9: 'Rumah Baloy',         // Correct answer for question 9
-    q10: 'Gorontalo'           // Correct answer for question 10
+        q1: 'Rumah Honai',
+        q2: 'Aceh',
+        q3: 'Terbuat dari kayu dan bambu',
+        q4: 'Rumah Joglo',
+        q5: 'Lampung',
+        q6: 'Sulawesi Selatan',
+        q7: 'Rumah Gapura Candi Bentar',
+        q8: 'Rumah Baileo',
+        q9: 'Rumah Baloy',
+        q10: 'Gorontalo'
       };
       let score = 0;
-      let correctAnswers = [];
 
       for (let i = 1; i <= totalQuestions; i++) {
         const userAnswer = document.querySelector(`input[name="q${i}"]:checked`);
         if (userAnswer && userAnswer.value === answers[`q${i}`]) {
           score++;
-          correctAnswers.push(`Soal ${i}: ${answers[`q${i}`]}`);
         }
       }
 
@@ -301,7 +299,48 @@
       document.getElementById('prev-btn').classList.add('hidden');
     }
 
+    function checkAnswer() {
+      const currentAnswerKey = `q${currentQuestion}`;
+      const selectedAnswer = document.querySelector(`input[name="${currentAnswerKey}"]:checked`);
+      const resultContainer = document.getElementById('result');
+      const answers = {
+        q1: 'Rumah Honai',
+        q2: 'Aceh',
+        q3: 'Terbuat dari kayu dan bambu',
+        q4: 'Rumah Joglo',
+        q5: 'Lampung',
+        q6: 'Sulawesi Selatan',
+        q7: 'Rumah Gapura Candi Bentar',
+        q8: 'Rumah Baileo',
+        q9: 'Rumah Baloy',
+        q10: 'Gorontalo'
+      };
+
+      resultContainer.classList.remove('hidden'); // Tampilkan hasil
+
+      if (selectedAnswer) {
+        if (selectedAnswer.value === answers[currentAnswerKey]) {
+          resultContainer.textContent = 'Benar!';
+          resultContainer.classList.add('correct'); // Tambahkan warna hijau
+          resultContainer.classList.remove('incorrect');
+          
+          // Lanjut ke soal berikutnya setelah 1 detik
+          setTimeout(() => {
+            nextQuestion();
+            resultContainer.classList.add('hidden'); // Sembunyikan pesan
+          }, 1000);
+        } else {
+          resultContainer.textContent = 'Jawaban-nya salah nih coba lagi';
+          resultContainer.classList.add('incorrect'); // Tambahkan warna merah
+          resultContainer.classList.remove('correct');
+        }
+      } else {
+        resultContainer.textContent = 'Silakan pilih salah satu jawaban.';
+      }
+    }
+
     showQuestion(currentQuestion);
-  </script>
+</script>
+
 </body>
 </html>
