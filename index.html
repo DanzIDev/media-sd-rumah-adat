@@ -176,6 +176,17 @@
     .wavy-btn svg {
       margin-right: 10px;
     }
+    .puzzle-popup button {
+  display: block;
+  margin: 10px auto; /* Adjusted margin for spacing */
+  padding: 10px 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 
   </style>
 </head>
@@ -225,6 +236,12 @@
         </svg>
         Quiz
       </a>
+      <a href="#puzzle" id="puzzle-btn" class="wavy-btn">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75l7.5 4.5-7.5 4.5V6.75z"></path>
+        </svg>
+        Puzzle
+      </a>
     
       <!-- Keluar Button with regular styling -->
       <button id="keluar-btn" class="wavy-btn">
@@ -244,6 +261,18 @@
     </svg>
   </button>
 
+    <!-- Modal for Puzzle Options -->
+<div id="puzzle-popup" class="modal">
+  <div class="modal-header">Pilih Wilayah</div>
+  <div class="modal-content">
+    <button id="baduy-btn" class="btn" onclick="selectOption('baduy')">Baduy</button>
+    <button id="diy-btn" class="btn" onclick="selectOption('diy')">DIY</button>
+    <button id="jakarta-btn" class="btn" onclick="selectOption('jakarta')">Jakarta</button>
+    <button id="jateng-btn" class="btn" onclick="selectOption('jateng')">Jawa Tengah</button>
+  </div>
+  <button class="close-btn" id="close-puzzle-modal">Tutup</button>
+</div>
+
   <!-- Popup Warning -->
   <div id="popup-warning" class="popup-warning">
     Klik kembali 2x untuk keluar.
@@ -254,49 +283,49 @@
 
   <!-- Scripts -->
   <script>
-    // Modal script
+    // Modal script for the general modal
     const tentangBtn = document.getElementById('tentang-btn');
     const modal = document.getElementById('modal');
     const closeModal = document.getElementById('close-modal');
-
+  
     tentangBtn.addEventListener('click', (e) => {
-      e.preventDefault();  // Prevent default link behavior
-      modal.style.display = 'block';  // Show the modal
+      e.preventDefault();
+      modal.style.display = 'block';
     });
-
+  
     closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';  // Hide the modal
+      modal.style.display = 'none';
     });
-
+  
     window.addEventListener('click', (event) => {
       if (event.target === modal) {
-        modal.style.display = 'none';  // Close modal if clicking outside of it
+        modal.style.display = 'none';
       }
     });
-
+  
     // Popup warning for exit
     const keluarBtn = document.getElementById('keluar-btn');
     const popupWarning = document.getElementById('popup-warning');
     let isFirstClick = false;
-
+  
     keluarBtn.addEventListener('click', () => {
       if (!isFirstClick) {
-        popupWarning.style.display = 'block';  // Show warning
+        popupWarning.style.display = 'block';
         isFirstClick = true;
         setTimeout(() => {
-          popupWarning.style.display = 'none';  // Hide warning after 3s
+          popupWarning.style.display = 'none';
           isFirstClick = false;
         }, 3000);
       } else {
-        window.location.href = 'index.html';  // Redirect to home page
+        window.location.href = 'index.html';
       }
     });
-
+  
     // Suara button functionality
     const suaraBtn = document.getElementById('suara-btn');
     const audio = document.getElementById('audio');
     let isPlaying = false;
-
+  
     suaraBtn.addEventListener('click', () => {
       if (isPlaying) {
         audio.pause();
@@ -307,11 +336,45 @@
       }
       isPlaying = !isPlaying;
     });
-  </script>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
+  
+    // Puzzle popup script
+    const puzzleBtn = document.getElementById('puzzle-btn');
+    const puzzlePopup = document.getElementById('puzzle-popup');
+    const closePuzzleModal = document.getElementById('close-puzzle-modal');
+  
+    puzzleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      puzzlePopup.style.display = 'block';
+    });
+  
+    // Handle selection of regions
+    document.getElementById('baduy-btn').addEventListener('click', () => {
+      window.location.href = 'puzzle-baduy.html';
+    });
+  
+    document.getElementById('diy-btn').addEventListener('click', () => {
+      window.location.href = 'puzzle-diy.html';
+    });
+  
+    document.getElementById('jakarta-btn').addEventListener('click', () => {
+      window.location.href = 'puzzle-jakarta.html';
+    });
+  
+    document.getElementById('jateng-btn').addEventListener('click', () => {
+      window.location.href = 'puzzle-jateng.html';
+    });
+  
+    // Close the puzzle popup
+    closePuzzleModal.addEventListener('click', () => {
+      puzzlePopup.style.display = 'none';  // Hide the puzzle modal
+    });
+  
+    // Close the puzzle modal if clicking outside of it
+    window.addEventListener('click', (event) => {
+      if (event.target === puzzlePopup) {
+        puzzlePopup.style.display = 'none';
+      }
+    });
   </script>
 </body>
 </html>
