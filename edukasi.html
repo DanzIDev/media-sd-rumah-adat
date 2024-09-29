@@ -145,6 +145,13 @@
     .back-btn:hover {
       background-color: #2b6cb0;
     }
+
+    .modal-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
   </style>
 </head>
 
@@ -186,39 +193,39 @@
 
   <!-- Script -->
   <script>
-    const rumahAdatData = {
+      const rumahAdatData = {
       Jawa: [
-        { name: 'Rumah Badui', info: 'Gaya bangunan rumah sangat sederhana, Batu kali digunakan sebagai penahan tanah agar tidak longsor, Jenis rumah panggung.' },
-        { name: 'Rumah Kebaya', info: 'Pondasi rumah terbuat dari susunan batu alam, Dinding terbuat dari kayu nangka, Atap seperti lipatan kebaya.' },
-        { name: 'Rumah Joglo', info: 'Balok yang letaknya paling atas, dianggap "kepala" bangunan, Memiliki 4 pilar penyangga, Jenis rumah joglo atau pendopo.' }
+        { name: 'Rumah Badui', info: 'Gaya bangunan rumah sangat sederhana, Batu kali digunakan sebagai penahan tanah agar tidak longsor, Jenis rumah panggung.', image: 'jawa/1.jpg' },
+        { name: 'Rumah Kebaya', info: 'Pondasi rumah terbuat dari susunan batu alam, Dinding terbuat dari kayu nangka, Atap seperti lipatan kebaya.', image: 'jawa/2.jpg' },
+        { name: 'Rumah Joglo', info: 'Balok yang letaknya paling atas, dianggap "kepala" bangunan, Memiliki 4 pilar penyangga, Jenis rumah joglo atau pendopo.', image: 'jawa/3.jpg' }
       ],
       Sumatera: [
-        { name: 'Rumah KrongBade', info: 'Ruang bawah sebagai penyimpanan bahan pangan. Ruang bawah sebagai aktivitas menenun kain. Jenis rumah panggung.' },
-        { name: 'Rumah Selaso Jatuh Kembar', info: 'Keseluruhan dibuat dari bahan alam. Hiasan dan bangunan mirip perahu. Difungsikan sebagai balai pertemuan adat.' },
-        { name: 'Rumah Nuwou Sesat', info: 'Atap terbuat dari ilalang/kayu. Umumnya dibuat dekat dengan sungai. Fungsi utama sebagai tempat pertemuan.' }
+        { name: 'Rumah KrongBade', info: 'Ruang bawah sebagai penyimpanan bahan pangan. Ruang bawah sebagai aktivitas menenun kain. Jenis rumah panggung.', image: 'sumatera/1.jpg' },
+        { name: 'Rumah Selaso Jatuh Kembar', info: 'Keseluruhan dibuat dari bahan alam. Hiasan dan bangunan mirip perahu. Difungsikan sebagai balai pertemuan adat.', image: 'sumatera/2.jpg' },
+        { name: 'Rumah Nuwou Sesat', info: 'Atap terbuat dari ilalang/kayu. Umumnya dibuat dekat dengan sungai. Fungsi utama sebagai tempat pertemuan.', image: 'sumatera/3.jpg' }
       ],
       Sulawesi: [
-        { name: 'Rumah Dulohupa', info: 'Kata Dulohupa berarti mufakat. Pilar kayu sebagai hiasan dan lambang. Jenis rumah panggung.' },
-        { name: 'Rumah Pewaris', info: 'Secara keseluruhan terbuat dari kayu ulin. Memiliki ukiran-ukiran pada bagian rumah. Jenis rumah panggung.' },
-        { name: 'Rumah Tongkonan', info: 'Bahan tidak memiliki unsur logam. Atap dibuat dari injuk atau rumbia. Atap berbentuk perahu terbalik.' }
+        { name: 'Rumah Dulohupa', info: 'Kata Dulohupa berarti mufakat. Pilar kayu sebagai hiasan dan lambang. Jenis rumah panggung.', image: 'sulawesi/1.jpg' },
+        { name: 'Rumah Pewaris', info: 'Secara keseluruhan terbuat dari kayu ulin. Memiliki ukiran-ukiran pada bagian rumah. Jenis rumah panggung.', image: 'sulawesi/2.jpg' },
+        { name: 'Rumah Tongkonan', info: 'Bahan tidak memiliki unsur logam. Atap dibuat dari injuk atau rumbia. Atap berbentuk perahu terbalik.', image: 'sulawesi/3.jpg' }
       ],
       Kalimantan: [
-        { name: 'Rumah Baloy', info: 'Bahan keseluruhan terbuat dari kayu ulin. Terdapat ukiran khas daerah pesisir. Jenis rumah panggung.' },
-        { name: 'Rumah Istana Kesultanan', info: 'Terbuat murni dari kayu. Arsitektur memadukan unsur melayu dan islam. Warna dinding putih dan warna atap coklat gelap.' },
-        { name: 'Rumah Bubungan Tinggi', info: 'Bentuk atap bagian tengah tinggi dan lancip. Tangga naik selalu memiliki jumlah ganjil. Diluar rumah terdapat pagar keliling.' }
+        { name: 'Rumah Baloy', info: 'Bahan keseluruhan terbuat dari kayu ulin. Terdapat ukiran khas daerah pesisir. Jenis rumah panggung.', image: 'kalimantan/1.jpg' },
+        { name: 'Rumah Istana Kesultanan', info: 'Terbuat murni dari kayu. Arsitektur memadukan unsur melayu dan islam. Warna dinding putih dan warna atap coklat gelap.', image: 'kalimantan/2.jpg' },
+        { name: 'Rumah Bubungan Tinggi', info: 'Bentuk atap bagian tengah tinggi dan lancip. Tangga naik selalu memiliki jumlah ganjil. Diluar rumah terdapat pagar keliling.', image: 'kalimantan/3.jpg' }
       ],
       Bali: [
-        { name: 'Rumah KrongBade', info: 'Gapura atau gerbang didesain seperti candi. Disebut gerbang terbelah. Terdapat patung di sekitar gapura.' }
+        { name: 'Rumah KrongBade', info: 'Gapura atau gerbang didesain seperti candi. Disebut gerbang terbelah. Terdapat patung di sekitar gapura.', image: 'bali/1.jpg' }
       ],
       Papua: [
-        { name: 'Rumah Honai', info: 'Atap terbentuk kerucut dari jerami. Lantai beralaskan tanah. Tidak memiliki jendela.' },
-        { name: 'Rumah Kaki Seribu', info: 'Atap daun jerami. Banyak tiang penopang. Jenis rumah panggung.' }
+        { name: 'Rumah Honai', info: 'Atap terbentuk kerucut dari jerami. Lantai beralaskan tanah. Tidak memiliki jendela.', image: 'papua/1.jpg' },
+        { name: 'Rumah Kaki Seribu', info: 'Atap daun jerami. Banyak tiang penopang. Jenis rumah panggung.', image: 'papua/2.jpg' }
       ],
       Maluku: [
-        { name: 'Rumah Sasadu', info: 'Bahan alam, kayu, dan daun sagu. Berfungsi untuk tempat pertemuan adat. Berfungsi sebagai tempat tinggal adat suku sasi.' }
+        { name: 'Rumah Sasadu', info: 'Bahan alam, kayu, dan daun sagu. Berfungsi untuk tempat pertemuan adat. Berfungsi sebagai tempat tinggal adat suku sasi.', image: 'maluku/1.jpg' }
       ],
       "Nusa Tenggara": [
-        { name: 'Rumah Dalam Loka', info: 'Material rumah adalah kayu dan ijuk. Terdapat 99 tiang penopang. Lambang tahta kesultanan Sumbawa.' }
+        { name: 'Rumah Dalam Loka', info: 'Material rumah adalah kayu dan ijuk. Terdapat 99 tiang penopang. Lambang tahta kesultanan Sumbawa.', image: 'ntt/1.jpg' }
       ]
     };
 
@@ -248,9 +255,14 @@
     }
 
     function showInfo(item) {
-      infoContainer.textContent = item.info;
-      infoModal.style.display = 'flex';
-    }
+  infoContainer.innerHTML = `
+    <img src="${item.image}" alt="${item.name}" class="mb-4 w-full h-auto rounded-md">
+    <h2 class="text-lg font-bold mb-2">${item.name}</h2>
+    <p>${item.info}</p>
+  `;
+  infoModal.style.display = 'flex';
+}
+
 
     document.getElementById('closeModal').addEventListener('click', () => {
       infoModal.style.display = 'none';
