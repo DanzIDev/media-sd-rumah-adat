@@ -10,7 +10,7 @@
             width: 100px;
             height: 100px;
             border: 1px solid #ccc;
-            cursor: grab;
+            cursor: pointer;
             background-size: 300%;
             background-repeat: no-repeat;
         }
@@ -25,47 +25,56 @@
         body {
             position: relative;
             min-height: 100vh;
-            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Warna biru gradient modern */
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
         }
 
-        .navbar {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding: 10px 0;
-            background-color: #2a5298;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        .back-btn {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    background-color: #2b6cb0;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.reset-btn {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    background-color: red;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+        /* Animation for placing a puzzle piece */
+        .placed-piece {
+            animation: fadeInScale 0.5s ease;
         }
 
-        .navbar a {
-            text-align: center;
-            font-size: 14px;
-            text-decoration: none;
-            color: white;
-            flex-grow: 1;
-            padding: 10px 0;
-        }
-
-        .navbar a:hover {
-            background-color: #1e3c72;
-        }
-
-        .navbar svg {
-            display: block;
-            margin: 0 auto 4px;
-            width: 24px;
-            height: 24px;
+        @keyframes fadeInScale {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
     <div class="flex flex-col items-center justify-center min-h-screen pb-20 p-8">
-        <h1 class="text-4xl font-bold text-white mb-4 text-center">Puzzle Rumah Adat Jakarta</h1>
-        
+        <h1 class="text-4xl font-bold text-white mb-4 text-center">Puzzle Rumah Adat</h1>
+
         <div id="puzzle-board" class="grid grid-cols-3 grid-rows-3 gap-1 mb-4">
             <!-- Puzzle slots will be generated here -->
         </div>
@@ -75,27 +84,8 @@
         </div>
     </div>
 
-    <!-- Tombol Kembali, Home, Next -->
-    <div class="navbar">
-        <a href="dashboard.html">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7m-9 9v-8a2 2 0 012-2h4a2 2 0 012 2v8m-6-6h.01" />
-            </svg>
-            Home
-        </a>
-        <a href="javascript:history.back()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-            Back
-        </a>
-        <a href="#next">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-            Next
-        </a>
-    </div>
+    <a href="index.html" class="back-btn">Kembali</a>
+    <a href="puzzle-jakarta.html" class="reset-btn">Reset</a>
 
     <script>
         const puzzleImages = [
@@ -103,8 +93,7 @@
         ];
 
         let currentImageIndex = 0;
-        let score = 0;
-        
+        let selectedPiece = null;
 
         function createPuzzle(imageSrc) {
             const puzzleBoard = document.getElementById('puzzle-board');
@@ -124,9 +113,9 @@
 
                 piece.style.backgroundPosition = `${xPosition}px ${yPosition}px`;
                 piece.classList.add('puzzle-piece');
-                piece.draggable = true;
                 piece.dataset.index = index;
-                piece.ondragstart = drag;
+                piece.id = 'piece-' + index;
+                piece.onclick = selectPiece;
 
                 puzzlePieces.appendChild(piece);
             });
@@ -135,8 +124,7 @@
                 const slot = document.createElement('div');
                 slot.classList.add('puzzle-slot');
                 slot.dataset.index = i;
-                slot.ondrop = drop;
-                slot.ondragover = allowDrop;
+                slot.onclick = placePiece;
                 puzzleBoard.appendChild(slot);
             }
         }
@@ -145,33 +133,24 @@
             createPuzzle(puzzleImages[currentImageIndex]);
         }
 
-        function drag(event) {
-            event.dataTransfer.setData("text/plain", event.target.dataset.index);
+        function selectPiece(event) {
+            selectedPiece = event.target;
         }
 
-        function allowDrop(event) {
-            event.preventDefault();
-        }
+        function placePiece(event) {
+            const slot = event.target;
 
-        function drop(event) {
-            event.preventDefault();
-            const draggedIndex = event.dataTransfer.getData("text/plain");
+            if (selectedPiece && slot.classList.contains('puzzle-slot') && !slot.style.backgroundImage) {
+                slot.style.backgroundImage = selectedPiece.style.backgroundImage;
+                slot.style.backgroundPosition = selectedPiece.style.backgroundPosition;
+                slot.classList.add('puzzle-piece', 'placed-piece'); // Add animation class
+                slot.classList.remove('puzzle-slot');
+                slot.draggable = false;
 
-            if (event.target.classList.contains('puzzle-slot')) {
-                const draggedPiece = document.querySelector(`[data-index="${draggedIndex}"].puzzle-piece`);
-                if (draggedPiece) {
-                    const dropSlot = event.target;
+                selectedPiece.remove();
+                selectedPiece = null;
 
-                    dropSlot.style.backgroundImage = draggedPiece.style.backgroundImage;
-                    dropSlot.style.backgroundPosition = draggedPiece.style.backgroundPosition;
-                    dropSlot.classList.add('puzzle-piece');
-                    dropSlot.classList.remove('puzzle-slot');
-                    dropSlot.draggable = false;
-
-                    draggedPiece.remove();
-
-                    checkSolved();
-                }
+                checkSolved();
             }
         }
 
