@@ -236,22 +236,28 @@
     </div>
 
     <!-- Hasil Kuis -->
-    <div id="result" class="result hidden mt-8 animate__animated animate__fadeInUp"></div>
+    <div id="result" class="result  hidden mt-8 animate__animated animate__fadeInUp"></div>
+    <div id="quiz-result" class="hidden"></div>
+
   </div>
 
-  <a href="index.html" class="back-btn">Back</a>
+  <a href="index.html" class="back-btn">Kembali</a>
+  <div id="quiz-result" class="hidden"></div>
   <script>
     let currentQuestion = 1;
     const totalQuestions = 10;
-
+  
     function showQuestion(questionNumber) {
       document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
       document.getElementById(`question-${questionNumber}`).classList.remove('hidden');
       
+      // Tombol Previous di-disable jika di pertanyaan pertama
       document.getElementById('prev-btn').disabled = questionNumber === 1;
+  
+      // Mengubah teks tombol Next menjadi Submit jika di pertanyaan terakhir
       document.getElementById('next-btn').textContent = questionNumber === totalQuestions ? 'Submit' : 'Next';
     }
-
+  
     function nextQuestion() {
       if (currentQuestion < totalQuestions) {
         currentQuestion++;
@@ -260,14 +266,14 @@
         submitQuiz();
       }
     }
-
+  
     function prevQuestion() {
       if (currentQuestion > 1) {
         currentQuestion--;
         showQuestion(currentQuestion);
       }
     }
-
+  
     function submitQuiz() {
       const answers = {
         q1: 'Rumah Honai',
@@ -281,24 +287,31 @@
         q9: 'Rumah Baloy',
         q10: 'Gorontalo'
       };
+  
       let score = 0;
-
+  
+      // Loop untuk cek jawaban setiap pertanyaan
       for (let i = 1; i <= totalQuestions; i++) {
         const userAnswer = document.querySelector(`input[name="q${i}"]:checked`);
         if (userAnswer && userAnswer.value === answers[`q${i}`]) {
           score++;
         }
       }
-
-      document.getElementById('result').innerHTML = `
-        <h2 class="text-2xl font-bold">Skor Anda: ${score}/10</h2>
+  
+      // Menampilkan hasil skor di class baru "quiz-result"
+      document.getElementById('quiz-result').innerHTML = `
+        <h2 class="text-2xl font-bold">Hasil Kuis</h2>
+        <p>Skor Anda: ${score}/10</p>
+        <p>Semua Quis Telah Di Selesaikan</p>
       `;
-      document.getElementById('result').classList.remove('hidden');
-      document.getElementById('quiz-container').classList.add('hidden');
+      
+      document.getElementById('quiz-result').classList.remove('hidden'); // Tampilkan hasil kuis
+      document.getElementById('result').classList.add('hidden'); // Sembunyikan result
+      document.getElementById('quiz-container').classList.add('hidden'); // Sembunyikan kuis
       document.getElementById('next-btn').classList.add('hidden');
       document.getElementById('prev-btn').classList.add('hidden');
     }
-
+  
     function checkAnswer() {
       const currentAnswerKey = `q${currentQuestion}`;
       const selectedAnswer = document.querySelector(`input[name="${currentAnswerKey}"]:checked`);
@@ -315,9 +328,9 @@
         q9: 'Rumah Baloy',
         q10: 'Gorontalo'
       };
-
-      resultContainer.classList.remove('hidden'); // Tampilkan hasil
-
+  
+      resultContainer.classList.remove('hidden'); // Tampilkan hasil sementara
+  
       if (selectedAnswer) {
         if (selectedAnswer.value === answers[currentAnswerKey]) {
           resultContainer.textContent = 'Benar!';
@@ -338,9 +351,14 @@
         resultContainer.textContent = 'Silakan pilih salah satu jawaban.';
       }
     }
-
+  
+    // Menampilkan pertanyaan pertama
     showQuestion(currentQuestion);
-</script>
+  </script>
+  
+  
+  
+
 
 </body>
 </html>
