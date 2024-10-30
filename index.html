@@ -189,6 +189,7 @@
 
 
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -320,6 +321,8 @@
         window.location.href = 'index.html';
       }
     });
+
+
   
     // Suara button functionality
     const suaraBtn = document.getElementById('suara-btn');
@@ -375,6 +378,20 @@
         puzzlePopup.style.display = 'none';
       }
     });
+
+    // Display the SweetAlert warning on page load
+document.addEventListener('DOMContentLoaded', () => {
+  Swal.fire({
+    icon: 'warning',
+    title: 'Game Sedang di Update',
+    text: 'Mohon menunggu 3x24 jam.',
+    confirmButtonText: 'OK',
+    background: '#333',
+    color: '#fff',
+    confirmButtonColor: '#0072ff',
+  });
+});
+
   </script>
 </body>
 </html>
