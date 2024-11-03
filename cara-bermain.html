@@ -228,132 +228,121 @@
       </div>
     </div>
     
-
+ 
     <!-- Navigasi Soal -->
     <div class="mt-8 flex justify-between">
       <button id="prev-btn" onclick="prevQuestion()" class="btn" disabled>Back</button>
       <button id="next-btn" onclick="checkAnswer()" class="btn">Next</button>
     </div>
 
-    <!-- Hasil Kuis -->
-    <div id="result" class="result  hidden mt-8 animate__animated animate__fadeInUp"></div>
-    <div id="quiz-result" class="hidden"></div>
+   <!-- Hasil Kuis -->
+<div id="result" class="result hidden mt-8 animate__animated animate__fadeInUp"></div>
+<div id="quiz-result" class="hidden mt-8 animate__animated animate__fadeInUp"></div>
+</div>
+<a href="index.html" class="back-btn">Kembali</a>
 
-  </div>
+<script>
+  let currentQuestion = 1;
+  const totalQuestions = 10;
+  let score = 0;
 
-  <a href="index.html" class="back-btn">Kembali</a>
-  <div id="quiz-result" class="hidden"></div>
-  <script>
-    let currentQuestion = 1;
-    const totalQuestions = 10;
-  
-    function showQuestion(questionNumber) {
-      document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
-      document.getElementById(`question-${questionNumber}`).classList.remove('hidden');
-      
-      // Tombol Previous di-disable jika di pertanyaan pertama
-      document.getElementById('prev-btn').disabled = questionNumber === 1;
-  
-      // Mengubah teks tombol Next menjadi Submit jika di pertanyaan terakhir
-      document.getElementById('next-btn').textContent = questionNumber === totalQuestions ? 'Submit' : 'Next';
+  function showQuestion(questionNumber) {
+    document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
+    document.getElementById(`question-${questionNumber}`).classList.remove('hidden');
+
+    document.getElementById('prev-btn').disabled = questionNumber === 1;
+    document.getElementById('next-btn').textContent = questionNumber === totalQuestions ? 'Submit' : 'Next';
+  }
+
+  function nextQuestion() {
+    const questionElement = document.getElementById(`question-${currentQuestion}`);
+    const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+
+    if (selectedAnswer && selectedAnswer.value === answers[`q${currentQuestion}`]) {
+      score++;
     }
-  
-    function nextQuestion() {
-      if (currentQuestion < totalQuestions) {
-        currentQuestion++;
-        showQuestion(currentQuestion);
+
+    questionElement.classList.add("hidden");
+    currentQuestion++;
+
+    const nextQuestionElement = document.getElementById(`question-${currentQuestion}`);
+    if (nextQuestionElement) {
+      nextQuestionElement.classList.remove("hidden");
+    } else {
+      submitQuiz();
+    }
+  }
+
+  function prevQuestion() {
+    if (currentQuestion > 1) {
+      currentQuestion--;
+      showQuestion(currentQuestion);
+    }
+  }
+
+  function submitQuiz() {
+    document.getElementById('quiz-result').innerHTML = `
+      <h2 class="text-2xl font-bold">Hasil Kuis</h2>
+      <p>Skor Anda: ${score}/${totalQuestions}</p>
+      <p>Jumlah Jawaban Benar: ${score}</p>
+      <p>Jumlah Jawaban Salah: ${totalQuestions - score}</p>
+    `;
+    
+    document.getElementById('quiz-result').classList.remove('hidden');
+    document.getElementById('result').classList.add('hidden');
+    document.getElementById('quiz-container').classList.add('hidden');
+    document.getElementById('next-btn').classList.add('hidden');
+    document.getElementById('prev-btn').classList.add('hidden');
+  }
+
+  const answers = {
+    q1: 'Rumah Honai',
+    q2: 'Aceh',
+    q3: 'Terbuat dari kayu dan bambu',
+    q4: 'Rumah Joglo',
+    q5: 'Lampung',
+    q6: 'Sulawesi Selatan',
+    q7: 'Rumah Gapura Candi Bentar',
+    q8: 'Rumah Baileo',
+    q9: 'Rumah Baloy',
+    q10: 'Gorontalo'
+  };
+
+  function checkAnswer() {
+    const currentAnswerKey = `q${currentQuestion}`;
+    const selectedAnswer = document.querySelector(`input[name="${currentAnswerKey}"]:checked`);
+    const resultContainer = document.getElementById('result');
+
+    resultContainer.classList.remove('hidden');
+
+    if (selectedAnswer) {
+      if (selectedAnswer.value === answers[currentAnswerKey]) {
+        resultContainer.textContent = 'Benar!';
+        resultContainer.classList.add('correct');
+        resultContainer.classList.remove('incorrect');
+
+        setTimeout(() => {
+          nextQuestion();
+          resultContainer.classList.add('hidden');
+        }, 1000);
       } else {
-        submitQuiz();
+        resultContainer.textContent = 'Waduh salah';
+        resultContainer.classList.add('incorrect');
+        resultContainer.classList.remove('correct');
+
+        setTimeout(() => {
+          nextQuestion();
+          resultContainer.classList.add('hidden');
+        }, 1000);
       }
+    } else {
+      resultContainer.textContent = 'Silakan pilih salah satu jawaban.';
     }
-  
-    function prevQuestion() {
-      if (currentQuestion > 1) {
-        currentQuestion--;
-        showQuestion(currentQuestion);
-      }
-    }
-  
-    function submitQuiz() {
-      const answers = {
-        q1: 'Rumah Honai',
-        q2: 'Aceh',
-        q3: 'Terbuat dari kayu dan bambu',
-        q4: 'Rumah Joglo',
-        q5: 'Lampung',
-        q6: 'Sulawesi Selatan',
-        q7: 'Rumah Gapura Candi Bentar',
-        q8: 'Rumah Baileo',
-        q9: 'Rumah Baloy',
-        q10: 'Gorontalo'
-      };
-  
-      let score = 0;
-  
-      // Loop untuk cek jawaban setiap pertanyaan
-      for (let i = 1; i <= totalQuestions; i++) {
-        const userAnswer = document.querySelector(`input[name="q${i}"]:checked`);
-        if (userAnswer && userAnswer.value === answers[`q${i}`]) {
-          score++;
-        }
-      }
-  
-      // Menampilkan hasil skor di class baru "quiz-result"
-      document.getElementById('quiz-result').innerHTML = `
-        <h2 class="text-2xl font-bold">Hasil Kuis</h2>
-        <p>Skor Anda: ${score}/10</p>
-        <p>Semua Quis Telah Di Selesaikan</p>
-      `;
-      
-      document.getElementById('quiz-result').classList.remove('hidden'); // Tampilkan hasil kuis
-      document.getElementById('result').classList.add('hidden'); // Sembunyikan result
-      document.getElementById('quiz-container').classList.add('hidden'); // Sembunyikan kuis
-      document.getElementById('next-btn').classList.add('hidden');
-      document.getElementById('prev-btn').classList.add('hidden');
-    }
-  
-    function checkAnswer() {
-      const currentAnswerKey = `q${currentQuestion}`;
-      const selectedAnswer = document.querySelector(`input[name="${currentAnswerKey}"]:checked`);
-      const resultContainer = document.getElementById('result');
-      const answers = {
-        q1: 'Rumah Honai',
-        q2: 'Aceh',
-        q3: 'Terbuat dari kayu dan bambu',
-        q4: 'Rumah Joglo',
-        q5: 'Lampung',
-        q6: 'Sulawesi Selatan',
-        q7: 'Rumah Gapura Candi Bentar',
-        q8: 'Rumah Baileo',
-        q9: 'Rumah Baloy',
-        q10: 'Gorontalo'
-      };
-  
-      resultContainer.classList.remove('hidden'); // Tampilkan hasil sementara
-  
-      if (selectedAnswer) {
-        if (selectedAnswer.value === answers[currentAnswerKey]) {
-          resultContainer.textContent = 'Benar!';
-          resultContainer.classList.add('correct'); // Tambahkan warna hijau
-          resultContainer.classList.remove('incorrect');
-          
-          // Lanjut ke soal berikutnya setelah 1 detik
-          setTimeout(() => {
-            nextQuestion();
-            resultContainer.classList.add('hidden'); // Sembunyikan pesan
-          }, 1000);
-        } else {
-          resultContainer.textContent = 'Jawaban-nya salah nih coba lagi';
-          resultContainer.classList.add('incorrect'); // Tambahkan warna merah
-          resultContainer.classList.remove('correct');
-        }
-      } else {
-        resultContainer.textContent = 'Silakan pilih salah satu jawaban.';
-      }
-    }
-  
-    // Menampilkan pertanyaan pertama
-    showQuestion(currentQuestion);
+  }
+
+  showQuestion(currentQuestion);
+</script>
+
   </script>
   
   
