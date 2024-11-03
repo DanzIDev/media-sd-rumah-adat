@@ -281,7 +281,8 @@
 
     function showInfo(item) {
   infoContainer.innerHTML = `
-    <img src="${item.image}" alt="${item.name}" class="mb-4 w-full h-auto rounded-md">
+  <div class="sketchfab-embed-wrapper"> <iframe title="Rumah Baduy" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/129f3e88f50b4cb987b43b207fc61010/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/rumah-baduy-129f3e88f50b4cb987b43b207fc61010?utm_medium=embed&utm_campaign=share-popup&utm_content=129f3e88f50b4cb987b43b207fc61010" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Rumah Baduy </a> by <a href="https://sketchfab.com/asyraaf?utm_medium=embed&utm_campaign=share-popup&utm_content=129f3e88f50b4cb987b43b207fc61010" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Asyraaf Ahmadi </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=129f3e88f50b4cb987b43b207fc61010" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
+  
     <h2 class="text-lg font-bold mb-2">${item.name}</h2>
     <p>${item.info}</p>
   `;
