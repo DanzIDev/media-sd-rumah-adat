@@ -8,7 +8,10 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body {
-      background: linear-gradient(to right, #00c6ff, #0072ff);
+      background: linear-gradient(to right, rgba(0, 198, 255, 0.5), rgba(0, 114, 255, 0.5)), 
+    url('assets/images/ind.jpg') no-repeat center center fixed;
+      background-size: cover;
+      background-blend-mode: overlay;
       color: white;
       font-family: sans-serif;
     }
@@ -379,18 +382,7 @@
       }
     });
 
-    // Display the SweetAlert warning on page load
-document.addEventListener('DOMContentLoaded', () => {
-  Swal.fire({
-    icon: 'warning',
-    title: 'Game Sedang di Update',
-    text: 'Mohon menunggu 3x24 jam.',
-    confirmButtonText: 'OK',
-    background: '#333',
-    color: '#fff',
-    confirmButtonColor: '#0072ff',
-  });
-});
+    
 
   </script>
 </body>
