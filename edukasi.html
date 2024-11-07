@@ -328,6 +328,20 @@
       currentIndex = 0; // Reset slider to the first slide
     });
   </script>
+    <audio id="bgMusic" src="music_play.mp3" loop></audio>
+
+    <script>
+        // Memutar musik secara otomatis ketika halaman dimuat
+        window.addEventListener('load', function () {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(error => {
+                console.log("Autoplay mungkin dicegah oleh browser: ", error);
+            });
+        });
+    </script>
+    
+      
+      
 </body>
 
 </html>
