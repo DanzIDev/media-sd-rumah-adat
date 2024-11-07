@@ -7,11 +7,8 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
-    body {
-      background: linear-gradient(to right, rgba(0, 198, 255, 0.5), rgba(0, 114, 255, 0.5)), 
-    url('assets/images/ind.jpg') no-repeat center center fixed;
-      background-size: cover;
-      background-blend-mode: overlay;
+       body {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
       color: white;
       font-family: sans-serif;
     }
@@ -269,9 +266,9 @@
 <div id="puzzle-popup" class="modal">
   <div class="modal-header">Pilih Wilayah</div>
   <div class="modal-content">
-    <button id="baduy-btn" class="btn" onclick="selectOption('baduy')">Baduy</button>
-    <button id="diy-btn" class="btn" onclick="selectOption('diy')">DIY</button>
-    <button id="jakarta-btn" class="btn" onclick="selectOption('jakarta')">Jakarta</button>
+    <button id="baduy-btn" class="btn" onclick="selectOption('baduy')">Baduy</button><br />
+    <button id="diy-btn" class="btn" onclick="selectOption('diy')">DIY</button><br />
+    <button id="jakarta-btn" class="btn" onclick="selectOption('jakarta')">Jakarta</button><br />
     <button id="jateng-btn" class="btn" onclick="selectOption('jateng')">Jawa Tengah</button>
   </div>
   <button class="close-btn" id="close-puzzle-modal">Tutup</button>
