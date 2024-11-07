@@ -256,11 +256,7 @@
   </div>
 
   <!-- Suara Button in bottom-right corner -->
-  <button id="suara-btn" class="suara-btn">
-    <svg id="suara-icon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 18V6l7 6-7 6z"></path>
-    </svg>
-  </button>
+
 
     <!-- Modal for Puzzle Options -->
 <div id="puzzle-popup" class="modal">
@@ -281,64 +277,59 @@
 
   <!-- Audio file -->
   <audio id="audio" src="music.mp3"></audio>
+  <button id="suara-btn" class="suara-btn" onclick="toggleMusic()">
+    <svg id="suara-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <!-- Ikon Speaker On (dengan gelombang suara) -->
+      <g id="speaker-on">
+        <path d="M5 9v6h4l5 5V4l-5 5H5z"></path>
+        <path d="M15.54 8.46a5 5 0 010 7.07M17.54 6.46a8 8 0 010 11.31"></path>
+      </g>
+      <!-- Ikon Speaker Off (dengan tanda silang) -->
+      <g id="speaker-off" style="display: none;">
+        <path d="M5 9v6h4l5 5V4l-5 5H5z"></path>
+        <path d="M18 6L6 18M6 6l12 12"></path>
+      </g>
+    </svg>
+  </button>
 
   <!-- Scripts -->
   <script>
-    // Modal script for the general modal
+    const audio = document.getElementById("audio");
+    const suaraIcon = document.getElementById("suara-icon");
+    const speakerOn = document.getElementById("speaker-on");
+    const speakerOff = document.getElementById("speaker-off");
+
+    function toggleMusic() {
+      if (audio.paused) {
+        audio.play();
+        speakerOn.style.display = "block";
+        speakerOff.style.display = "none";
+      } else {
+        audio.pause();
+        speakerOn.style.display = "none";
+        speakerOff.style.display = "block";
+      }
+    }
+
+    window.onload = function() {
+      audio.play();
+      speakerOn.style.display = "block";
+      speakerOff.style.display = "none";
+    };
+
     const tentangBtn = document.getElementById('tentang-btn');
     const modal = document.getElementById('modal');
     const closeModal = document.getElementById('close-modal');
-  
-    tentangBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      modal.style.display = 'block';
-    });
-  
-    closeModal.addEventListener('click', () => {
-      modal.style.display = 'none';
-    });
-  
-    window.addEventListener('click', (event) => {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    });
-  
-    // Popup warning for exit
-    const keluarBtn = document.getElementById('keluar-btn');
-    const popupWarning = document.getElementById('popup-warning');
-    let isFirstClick = false;
-  
-    keluarBtn.addEventListener('click', () => {
-      if (!isFirstClick) {
-        popupWarning.style.display = 'block';
-        isFirstClick = true;
-        setTimeout(() => {
-          popupWarning.style.display = 'none';
-          isFirstClick = false;
-        }, 3000);
-      } else {
-        window.location.href = 'index.html';
-      }
-    });
+
+    tentangBtn.addEventListener('click', () => modal.style.display = 'block');
+    closeModal.addEventListener('click', () => modal.style.display = 'none');
+    window.onclick = function(event) {
+      if (event.target == modal) modal.style.display = "none";
+    };
+  </script>
 
 
-  
-    // Suara button functionality
-    const suaraBtn = document.getElementById('suara-btn');
-    const audio = document.getElementById('audio');
-    let isPlaying = false;
-  
-    suaraBtn.addEventListener('click', () => {
-      if (isPlaying) {
-        audio.pause();
-        suaraBtn.innerHTML = '<svg id="suara-icon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M9 18V6l7 6-7 6z"></path></svg>';
-      } else {
-        audio.play();
-        suaraBtn.innerHTML = '<svg id="suara-icon" class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>';
-      }
-      isPlaying = !isPlaying;
-    });
+<script>
   
     // Puzzle popup script
     const puzzleBtn = document.getElementById('puzzle-btn');
@@ -382,5 +373,6 @@
     
 
   </script>
+  
 </body>
 </html>
