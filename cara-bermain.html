@@ -239,7 +239,12 @@
 <div id="result" class="result hidden mt-8 animate__animated animate__fadeInUp"></div>
 <div id="quiz-result" class="hidden mt-8 animate__animated animate__fadeInUp"></div>
 </div>
-<a href="index.html" class="back-btn">Kembali</a>
+<a href="index.html" class="back-btn flex items-center">
+  <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H3m0 0l6 6m-6-6l6-6"></path>
+  </svg>
+  Back
+</a>
 
 <script>
   let currentQuestion = 1;
@@ -344,7 +349,18 @@
 </script>
 
   </script>
-  
+  <audio id="bgMusic" src="music_play.mp3" loop></audio>
+
+<script>
+    // Memutar musik secara otomatis ketika halaman dimuat
+    window.addEventListener('load', function () {
+        const music = document.getElementById('bgMusic');
+        music.play().catch(error => {
+            console.log("Autoplay mungkin dicegah oleh browser: ", error);
+        });
+    });
+</script>
+
   
   
 
