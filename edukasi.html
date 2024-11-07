@@ -328,7 +328,7 @@
       currentIndex = 0; // Reset slider to the first slide
     });
   </script>
-    <audio id="bgMusic" src="music_play.mp3" loop></audio>
+ <audio id="bgMusic" src="music_play.mp3" loop></audio>
 
     <script>
         // Memutar musik secara otomatis ketika halaman dimuat
@@ -339,6 +339,13 @@
             });
         });
     </script>
+    
+    <script>
+      function animatePulauSelection() {
+        const pulauSelection = document.getElementById("pulauSelection");
+        pulauSelection.classList.add("animate__animated", "animate__zoomIn");
+      }
+      </script>
     
       
       
