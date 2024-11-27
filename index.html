@@ -22,39 +22,50 @@
     }
 
     .image-container {
-  width: 100%; /* Pastikan selebar layar */
-  height: 60%; /* Atur tinggi container sesuai kebutuhan */
-  display: flex;
-  justify-content: center; /* Memusatkan secara horizontal */
-  align-items: center; /* Memusatkan secara vertikal */
-  position: relative; /* Pastikan posisi relatif agar mudah dikontrol */
-  top: -20px; /* Sesuaikan nilai ini untuk menggeser ke atas */
-}
+      width: 45%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-.image-container img {
-  max-width: 80%; /* Batasi lebar gambar agar responsif */
-  border-radius: 10px; /* Tetap mempertahankan sudut melengkung */
-}
-
-
+    .image-container img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
 
     .menu-container {
-  position: absolute; /* Letakkan di bawah */
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-wrap: wrap; /* Supaya tombol dapat berpindah baris */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dua tombol per baris */
   gap: 20px; /* Jarak antar tombol */
-  justify-content: center;
-  align-items: center;
-  width: 100%; /* Pastikan fleksibel di semua layar */
+  justify-content: center; /* Posisi di tengah horizontal */
+  align-items: center; /* Posisi di tengah vertikal */
 }
 
+
+
 .wavy-btn {
-  flex: 0 1 calc(45% - 20px); /* Dua tombol per baris */
-  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px; /* Lebar tombol */
+  height: 80px; /* Tinggi tombol, sama dengan lebar */
+  background-color: rgba(255, 255, 255, 0.8); /* Warna latar tombol */
+  color: #333; /* Warna teks */
+  border: none; /* Pastikan tidak ada border */
+  border-radius: 8px; /* Sudut sedikit melengkung, ubah ke 0 jika ingin tajam */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Bayangan */
+  font-size: 14px; /* Ukuran font */
+  font-weight: bold; /* Tebal teks */
+  cursor: pointer; /* Kursor berubah jadi pointer */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
+.wavy-btn:hover {
+  background-color: white; /* Warna tombol saat hover */
+  transform: scale(1.05); /* Efek zoom saat hover */
+}
+
+
 
     .btn {
       display: flex;
@@ -88,25 +99,24 @@
     }
 
     .suara-btn {
-  position: absolute; /* Posisi tombol */
-  top: 20px; /* Jarak dari atas */
-  right: 20px; /* Jarak dari kanan */
-  width: 100px;
-  height: 60px;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: #333;
-  border-radius: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      width: 100px;
+      height: 60px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
 
-.suara-btn:hover {
-  background-color: white;
-  transform: scale(1.05);
-}
-
+    .suara-btn:hover {
+      background-color: white;
+      transform: scale(1.05);
+    }
 
     .suara-btn svg {
       width: 24px;
@@ -229,13 +239,14 @@
 
   <!-- Main Content -->
   <div class="main-container">
-    <!-- Kolom Gambar -->
+    <!-- Left Column: Image -->
     <div class="image-container">
-      <center><img src="./assets/images/shine.png" alt="Puzzle Rumah Adat Image"></center>
+      <img src="./assets/images/shine.png" alt="Puzzle Rumah Adat Image">
     </div>
-  
-    <!-- Tombol Menu -->
+
+    <!-- Right Column: Menu -->
     <div class="menu-container">
+      <!-- Edukasi Button with Wavy Effect -->
       <a href="edukasi.html" class="wavy-btn">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v6m0 4v.01"></path>
@@ -243,6 +254,8 @@
         </svg>
         Belajar
       </a>
+    
+      <!-- Quiz Button with Wavy Effect -->
       <a href="cara-bermain.html" class="wavy-btn">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75l7.5 4.5-7.5 4.5V6.75z"></path>
@@ -255,6 +268,8 @@
         </svg>
         Bermain
       </a>
+    
+      <!-- Keluar Button with regular styling -->
       <button id="keluar-btn" class="wavy-btn">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -264,7 +279,6 @@
     </div>
     
   </div>
-  
 
   <!-- Suara Button in bottom-right corner -->
 
