@@ -126,18 +126,24 @@
     /* Modal styles */
     .modal {
       display: none;
+      width:100%;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: rgba(0, 0, 0, 0.8);
-      color: white;
+      background-color: azure;
+      color: black;
       padding: 1rem 2rem;
       border-radius: 10px;
       z-index: 9999;
-      width: 300px;
+      width: 700px;
       text-align: center;
     }
+    .modal {
+  @apply p-4 bg-white rounded-lg shadow-lg w-[90%] md:w-[600px] max-h-[90%] overflow-hidden mx-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+}
+
+
 
     .modal-header {
       font-size: 1.5rem;
@@ -181,11 +187,11 @@
     }
 
     .wavy-btn {
-      display: inline-flex;
+      display:;
       align-items: center;
       justify-content: center;
-      width: 250px;
-      height: 60px;
+      width: 200px;
+      height: 100px;
       background-color: rgba(255, 255, 255, 0.8);
       color: #333;
       border-radius: 25px;
@@ -196,6 +202,9 @@
     .wavy-btn:hover {
       background-color: white;
       transform: scale(1.05);
+    }
+    .wavy-btn img {
+      width:50%
     }
 
     .wavy-btn svg {
@@ -225,17 +234,38 @@
 
   <!-- Modal for 'Tentang' -->
   <div id="modal" class="modal">
-    <div class="modal-header">Info</div>
-    <div class="modal-content">
-      <p>Nama: Siti Rohimah</p>
-      <p>NIM: 2003010031</p>
-      <p>Teknik Informatika, Universitas Perjuangan Tasikmalaya</p>
-      <p>Email: ntiwpandaa@gmail.com</p>
-      <p>No Tlp: 088971449182</p>
-      <p>Instagram: @4451my_</p>
+    <div class="modal-header">Profil Pengembang</div>
+    <div class="modal-content overflow-y-auto">
+      <!-- Bagian Gambar dan Informasi -->
+      <div class="flex items-start">
+        <!-- Gambar -->
+        <div class="modal-image mr-4">
+          <img src="./assets/images/profile.png" alt="Foto Pengembang" class="w-24 h-24 rounded-full" />
+        </div>
+        <!-- Informasi -->
+        <div class="modal-info text-left">
+          <p><strong>Nama:</strong> Siti Rohimah</p>
+          <p><strong>NIM:</strong> 2003010031</p>
+          <p><strong>Prodi:</strong> Teknik Informatika</p>
+          <p><strong>Universitas:</strong> Universitas Perjuangan Tasikmalaya</p>
+          <p><strong>Email:</strong> ntiwpandaa@gmail.com</p>
+          <p><strong>No Tlp:</strong> 088971449182</p>
+          <p><strong>Instagram:</strong> @4451my_</p>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer mt-4">
+        <p>
+          Aplikasi ini bertujuan untuk memfasilitasi pemahaman tentang mengenal rumah adat nusantara, 
+          mendorong belajar mandiri, membuat belajar menjadi menyenangkan, meningkatkan hasil belajar, 
+          dan mendukung guru dalam pengajaran.
+        </p>
+      </div>
     </div>
     <button class="close-btn" id="close-modal">Tutup</button>
   </div>
+  
+  
 
   <!-- Main Content -->
   <div class="main-container">
@@ -247,33 +277,24 @@
     <!-- Right Column: Menu -->
     <div class="menu-container">
       <!-- Edukasi Button with Wavy Effect -->
-      <a href="edukasi.html" class="wavy-btn">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v6m0 4v.01"></path>
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16"></path>
-        </svg>
-        Belajar
+      <a href="edukasi.html" class="wavy-btn flex flex-col items-center justify-center">
+        <img src="./assets/images/i.png" alt="Belajar" class="mb-0" />
+        <span>Belajar</span>
       </a>
     
       <!-- Quiz Button with Wavy Effect -->
-      <a href="cara-bermain.html" class="wavy-btn">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75l7.5 4.5-7.5 4.5V6.75z"></path>
-        </svg>
+      <a href="cara-bermain.html" class="wavy-btn flex flex-col items-center justify-center">
+        <img src="./assets/images/c.png" alt="Belajar" class="mb-0" />
         Kuis
       </a>
-      <a href="#puzzle" id="puzzle-btn" class="wavy-btn">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 6.75l7.5 4.5-7.5 4.5V6.75z"></path>
-        </svg>
+      <a href="#puzzle" id="puzzle-btn" class="wavy-btn flex flex-col items-center justify-center">
+        <img src="./assets/images/d.png" alt="Belajar" class="mb-0" />
         Bermain
       </a>
     
       <!-- Keluar Button with regular styling -->
-      <button id="keluar-btn" class="wavy-btn">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-        </svg>
+      <button id="keluar-btn" class="wavy-btn flex flex-col items-center justify-center">
+        <img src="./assets/images/x.png" alt="Belajar" class="mb-0" />
         Keluar
       </button>
     </div>
@@ -301,7 +322,7 @@
   </div>
 
   <!-- Audio file -->
-  <audio id="audio" src="happy.mp3"></audio>
+  <audio id="audio" src="music.mp3"></audio>
   <button id="suara-btn" class="suara-btn" onclick="toggleMusic()">
     <svg id="suara-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
       <!-- Ikon Speaker On (dengan gelombang suara) -->
