@@ -139,6 +139,21 @@
       width: 700px;
       text-align: center;
     }
+    .modal-b {
+      display: none;
+      width:100%;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: black;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      z-index: 9999;
+      width: 300px;
+      text-align: center;
+    }
     .modal {
   @apply p-4 bg-white rounded-lg shadow-lg w-[90%] md:w-[600px] max-h-[90%] overflow-hidden mx-auto fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
 }
@@ -240,7 +255,7 @@
       <div class="flex items-start">
         <!-- Gambar -->
         <div class="modal-image mr-4">
-          <img src="./assets/images/profile.png" alt="Foto Pengembang" class="w-24 h-24 rounded-full" />
+          <img src="./assets/images/profile.jpg" alt="Foto Pengembang" class="w-24 h-34 rounded-full" />
         </div>
         <!-- Informasi -->
         <div class="modal-info text-left">
@@ -305,7 +320,7 @@
 
 
     <!-- Modal for Puzzle Options -->
-<div id="puzzle-popup" class="modal">
+<div id="puzzle-popup" class="modal-b">
   <div class="modal-header">Pilih Wilayah</div>
   <div class="modal-content">
     <button id="baduy-btn" class="btn" onclick="selectOption('baduy')">Baduy</button><br />
