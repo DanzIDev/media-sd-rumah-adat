@@ -1,113 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuis Rumah Adat</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <title>Rumah Adat Slider</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <style>
-   body {
-    background: linear-gradient(135deg, #1e90ff, #ff7f50); /* Brighter pink gradient */
+    body {
+      background:url('assets/images/bg-edukasi.jpg') no-repeat center center fixed;
       color: white;
-      font-family: 'Comic Sans MS', sans-serif; /* Kid-friendly font */
+      background-size: cover;
       min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: center;
-    }
-
-    .corner-card {
-      background-color: white;
-      color: black;
       padding: 1rem;
-      border-radius: 50%;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+      font-family: 'Comic Sans MS', 'Comic Sans', sans-serif;
+
+    }
+
+    .card-container {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
       justify-content: center;
-      transform: scale(1);
-      transition: all 0.3s ease;
+      max-width: 600px;
     }
 
-    .corner-card:hover {
-      transform: scale(1.1);
-      background-color: #ffedf3;
-    }
-
-    .btn {
-      background-color: #ff577f;
-      color: white;
-      font-weight: bold;
-      padding: 0.75rem 1.25rem;
-      border-radius: 50px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .btn:hover {
-      transform: scale(1.05);
-      background-color: #e04e6d;
-    }
-
-    .quiz-container {
-      background-color: white;
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      width: 100%;
-      max-width: 30rem;
-      color: black;
-    }
-
-    .question {
-      margin-bottom: 1rem;
-      text-align: left;
+    .card {
+      background-color: #ffeb3b;
       color: #333;
-    }
-
-    .result {
-      background-color: #1f2937;
-      color: white;
-      padding: 1.5rem;
-      border-radius: 0.75rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       text-align: center;
-      margin-top: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      font-size: 1rem;
+      flex: 1 1 120px;
     }
 
-    .navbar {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px 0;
-      background-color: #ff7eb3;
-      color: white;
+    .card:hover {
+      transform: scale(1.1);
+      background-color: #ffca28;
+    }
+
+    .modal {
+      display: none;
       position: fixed;
-      bottom: 0;
+      z-index: 50;
+      left: 0;
+      top: 0;
       width: 100%;
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
     }
 
-    .navbar a {
-      text-align: center;
-      font-size: 16px;
-      text-decoration: none;
+    .modal-content {
+      background-color: #ffffff;
+      color: #333;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      max-width: 600px;
+      height:400px;
+      width: 100%;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      text-align: left;
+    }
+
+    .close-btn {
+      background-color: #e53e3e;
       color: white;
-      flex-grow: 1;
-      padding: 10px 0;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: -1rem;
+      margin-right: -1rem;
     }
 
-    .navbar a:hover {
-      background-color: #ff577f;
+    .close-btn:hover {
+      background-color: #c53030;
     }
 
-    .navbar svg {
-      display: block;
-      margin: 0 auto 4px;
-      width: 24px;
-      height: 24px;
+    .slider-container {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
     }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 150px;
+      cursor: pointer;
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .arrow-btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .prev {
+      left: 10px;
+    }
+
+    .next {
+      right: 10px;
+    }
+
     .back-btn {
       position: fixed;
       left: 1rem;
@@ -120,124 +144,80 @@
       font-weight: bold;
       transition: background-color 0.3s ease;
     }
+
+    .back-btn:hover {
+      background-color: #2b6cb0;
+    }
+
+    .modal-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM3gYb7jZ0bPf3twI6L5FfD/VzBvW56XxVs3W8" crossorigin="anonymous">
+
 </head>
-<body class="animate__animated animate__fadeIn">
 
-  <!-- Card Logo di pojok kanan atas -->
-  <a href="tentang.html" class="corner-card absolute top-4 right-4">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M3 12h18M12 3l6 6M12 3l-6 6M12 21l6-6M12 21l-6-6" />
-    </svg>
-    <span class="ml-2 text-sm font-bold">Tentang</span>
-  </a>
+<body onload="animatePulauSelection()">
+<!-- Pulau Selection -->
+<div id="pulauSelection" class="flex flex-col items-center justify-center h-screen">
+  <h1 class="text-2xl font-bold mb-4">Pilih Pulau</h1>
+  <div class="card-container grid grid-cols-4 gap-4">
 
-  <!-- Konten Utama -->
-  <div class="quiz-container text-center animate__animated animate__fadeInUp">
-    <h1 class="text-4xl font-bold text-blue-600 mb-8">Kuis Rumah Adat</h1>
-    
-    <div id="quiz-container" class="space-y-6">
-      <!-- Soal 1 -->
-      <div class="question hidden" id="question-1">
-        <p class="text-lg font-semibold">1. Apa nama rumah adat dari Papua?</p>
-        <label class="block"><input type="radio" name="q1" value="Rumah Gadang" class="mr-2"> Rumah Gadang</label>
-        <label class="block"><input type="radio" name="q1" value="Tongkonan" class="mr-2"> Tongkonan</label>
-        <label class="block"><input type="radio" name="q1" value="Rumah Honai" class="mr-2"> Rumah Honai</label>
-        <label class="block"><input type="radio" name="q1" value="Rumah Limas" class="mr-2"> Rumah Limas</label>
-      </div>
-    
-      <!-- Soal 2 -->
-      <div class="question hidden" id="question-2">
-        <p class="text-lg font-semibold">2. Rumah adat Rumoh Aceh berasal dari daerah mana?</p>
-        <label class="block"><input type="radio" name="q2" value="Sumatera" class="mr-2"> Sumatera</label>
-        <label class="block"><input type="radio" name="q2" value="Aceh" class="mr-2"> Aceh</label>
-        <label class="block"><input type="radio" name="q2" value="Lampung" class="mr-2"> Lampung</label>
-        <label class="block"><input type="radio" name="q2" value="Papua" class="mr-2"> Papua</label>
-      </div>
-    
-      <!-- Soal 3 -->
-      <div class="question hidden" id="question-3">
-        <p class="text-lg font-semibold">3. Bagaimana ciri khas dari rumah adat Baduy?</p>
-        <label class="block"><input type="radio" name="q3" value="Atap melengkung seperti tanduk kerbau" class="mr-2"> Atap melengkung seperti tanduk kerbau</label>
-        <label class="block"><input type="radio" name="q3" value="Bangunan rumah sangat mewah" class="mr-2"> Bangunan rumah sangat mewah</label>
-        <label class="block"><input type="radio" name="q3" value="Terbuat dari kayu dan bambu" class="mr-2"> Terbuat dari kayu dan bambu</label>
-        <label class="block"><input type="radio" name="q3" value="Gaya bangunan rumah sangat sederhana" class="mr-2"> Gaya bangunan rumah sangat sederhana</label>
-      </div>
-    
-      <!-- Soal 4 -->
-      <div class="question hidden" id="question-4">
-        <p class="text-lg font-semibold">4. Rumah adat yang terbuat dari kayu jati dan atapnya seperti membentuk sebuah gunung adalah ciri khas dari rumah adat?</p>
-        <label class="block"><input type="radio" name="q4" value="Rumah Badui" class="mr-2"> Rumah Badui</label>
-        <label class="block"><input type="radio" name="q4" value="Rumah Joglo" class="mr-2"> Rumah Joglo</label>
-        <label class="block"><input type="radio" name="q4" value="Rumah Tongkonan" class="mr-2"> Rumah Tongkonan</label>
-        <label class="block"><input type="radio" name="q4" value="Rumah Banjar" class="mr-2"> Rumah Banjar</label>
-      </div>
-    
-      <!-- Soal 5 -->
-      <div class="question hidden" id="question-5">
-        <p class="text-lg font-semibold">5. Rumah Adat Nuwou Sesat berasal dari daerah?</p>
-        <label class="block"><input type="radio" name="q5" value="Kalimantan Barat" class="mr-2"> Kalimantan Barat</label>
-        <label class="block"><input type="radio" name="q5" value="Kalimantan Selatan" class="mr-2"> Kalimantan Selatan</label>
-        <label class="block"><input type="radio" name="q5" value="Lampung" class="mr-2"> Lampung</label>
-        <label class="block"><input type="radio" name="q5" value="Kalimantan Timur" class="mr-2"> Kalimantan Timur</label>
-      </div>
-    
-      <!-- Soal 6 -->
-      <div class="question hidden" id="question-6">
-        <p class="text-lg font-semibold">6. Rumah tradisional yang berbentuk panggung dengan tiang-tiang kayu tinggi adalah ciri khas rumah adat dari?</p>
-        <label class="block"><input type="radio" name="q6" value="Sumatera Selatan" class="mr-2"> Sumatera Selatan</label>
-        <label class="block"><input type="radio" name="q6" value="Kalimantan Barat" class="mr-2"> Kalimantan Barat</label>
-        <label class="block"><input type="radio" name="q6" value="Sulawesi Selatan" class="mr-2"> Sulawesi Selatan</label>
-        <label class="block"><input type="radio" name="q6" value="Aceh" class="mr-2"> Aceh</label>
-      </div>
-    
-      <!-- Soal 7 -->
-      <div class="question hidden" id="question-7">
-        <p class="text-lg font-semibold">7. Rumah adat Bali dikenal dengan nama?</p>
-        <label class="block"><input type="radio" name="q7" value="Rumah Gapura Candi Bentar" class="mr-2"> Rumah Gapura Candi Bentar</label>
-        <label class="block"><input type="radio" name="q7" value="Rumah Gadang" class="mr-2"> Rumah Gadang</label>
-        <label class="block"><input type="radio" name="q7" value="Rumah Tongkonan" class="mr-2"> Rumah Tongkonan</label>
-        <label class="block"><input type="radio" name="q7" value="Rumah Honai" class="mr-2"> Rumah Honai</label>
-      </div>
-    
-      <!-- Soal 8 -->
-      <div class="question hidden" id="question-8">
-        <p class="text-lg font-semibold">8. Apa nama rumah adat dari kota Ambon Maluku?</p>
-        <label class="block"><input type="radio" name="q8" value="Rumah Badui" class="mr-2"> Rumah Badui</label>
-        <label class="block"><input type="radio" name="q8" value="Rumah Baileo" class="mr-2"> Rumah Baileo</label>
-        <label class="block"><input type="radio" name="q8" value="Rumah Baduy" class="mr-2"> Rumah Baduy</label>
-        <label class="block"><input type="radio" name="q8" value="Rumah Joglo" class="mr-2"> Rumah Joglo</label>
-      </div>
-    
-      <!-- Soal 9 -->
-      <div class="question hidden" id="question-9">
-        <p class="text-lg font-semibold">9. Rumah adat yang terdapat ukiran khas daerah pesisir adalah khas rumah dari?</p>
-        <label class="block"><input type="radio" name="q9" value="Rumah Krongbade" class="mr-2"> Rumah Krongbade</label>
-        <label class="block"><input type="radio" name="q9" value="Rumah Kakiseribu" class="mr-2"> Rumah Kakiseribu</label>
-        <label class="block"><input type="radio" name="q9" value="Rumah Baloy" class="mr-2"> Rumah Baloy</label>
-        <label class="block"><input type="radio" name="q9" value="Rumah Istana Kesultanan" class="mr-2"> Rumah Istana Kesultanan</label>
-      </div>
-    
-      <!-- Soal 10 -->
-      <div class="question hidden" id="question-10">
-        <p class="text-lg font-semibold">10. Rumah Dulohupa berasal dari daerah?</p>
-        <label class="block"><input type="radio" name="q10" value="Lampung" class="mr-2"> Lampung</label>
-        <label class="block"><input type="radio" name="q10" value="Bali" class="mr-2"> Bali</label>
-        <label class="block"><input type="radio" name="q10" value="Jakarta" class="mr-2"> Jakarta</label>
-        <label class="block"><input type="radio" name="q10" value="Gorontalo" class="mr-2"> Gorontalo</label>
-      </div>
-    </div>
-    
- 
-    <!-- Navigasi Soal -->
-    <div class="mt-8 flex justify-between">
-      <button id="prev-btn" onclick="prevQuestion()" class="btn" disabled>Back</button>
-      <button id="next-btn" onclick="checkAnswer()" class="btn">Next</button>
+    <!-- Pulau Jawa -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Jawa')">
+      <span class="text-center mb-2">Pulau Jawa</span>
+      <!-- Smiley Icon -->
+     <img src="./assets/images/anakjawa.png" >
+     
     </div>
 
-   <!-- Hasil Kuis -->
-<div id="result" class="result hidden mt-8 animate__animated animate__fadeInUp"></div>
-<div id="quiz-result" class="hidden mt-8 animate__animated animate__fadeInUp"></div>
+    <!-- Pulau Sumatera -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Sumatera')">
+      <span class="text-center mb-2">Pulau Sumatera</span>
+      <img src="./assets/images/kid_head (1).png" >
+      </svg>
+    </div>
+
+    <!-- Pulau Sulawesi -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Sulawesi')">
+      <span class="text-center mb-2">Pulau Sulawesi</span>
+      <img src="./assets/images/kid_head3.png" >
+    </div>
+
+    <!-- Pulau Kalimantan -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Kalimantan')">
+      <span class="text-center mb-2">Pulau Kalimantan</span>
+      <img src="./assets/images/kid_write.png" >
+      </svg>
+    </div>
+
+    <!-- Pulau Bali -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Bali')">
+      <span class="text-center mb-2">Pulau Bali</span>
+      <img src="./assets/images/anakbali.png" >
+    </div>
+
+    <!-- Pulau Papua -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Papua')">
+      <span class="text-center mb-2">Pulau Papua</span>
+      <img src="./assets/images/anakpapua.png" >
+    </div>
+
+    <!-- Pulau NTT -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Maluku')">
+      <span class="text-center mb-2">Kepulauan Maluku</span>
+      <img src="./assets/images/kidcewe.png" >
+    </div>
+    <!-- Pulau NTT -->
+    <div class="card bg-yellow-200 p-4 rounded-lg shadow-lg flex flex-col items-center cursor-pointer hover:bg-yellow-300" onclick="showRumahAdat('Nusa Tenggara')">
+      <span class="text-center mb-2">Kepulauan NTT</span>
+      <img src="./assets/images/kid_cewe.png" >
+    </div>
+
+  </div>
 </div>
 <a href="index.html" class="back-btn flex items-center">
   <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -246,124 +226,157 @@
   Kembali
 </a>
 
-<script>
-  let currentQuestion = 1;
-  const totalQuestions = 10;
-  let score = 0;
+<!-- Slider Container -->
+<div class="slider-container hidden bg-cover bg-center h-40 " id="sliderContainer" style="background-image: url('your-image-url.jpg');">
+  <h1 class="text-2xl text-center font-bold mb-4 text-transparent bg-blue-500   text-white   px-4 py-2  rounded-lg  ">
+    Klik untuk melihat rumah
+  </h1>
+  
+  
+  <div class="bg-blue-500">
+  <div id="prev" class="arrow-btn prev">&larr;</div>
+  <div id="slider" class="slider text-2xl pb-20">
+    <!-- Dynamic Slides will be injected here -->
+ </div>
+  <div id="next" class="arrow-btn next">&rarr;</div></div>
+   <h1 class="text-2xl font-bold mb-4">Pilih Pulau</h1>
+  <button id="backToPulauSelection" class="back-btn">Kembali ke Pilih Pulau</button>
+</div>
 
-  function showQuestion(questionNumber) {
-    document.querySelectorAll('.question').forEach(q => q.classList.add('hidden'));
-    document.getElementById(`question-${questionNumber}`).classList.remove('hidden');
 
-    document.getElementById('prev-btn').disabled = questionNumber === 1;
-    document.getElementById('next-btn').textContent = questionNumber === totalQuestions ? 'Submit' : 'Next';
-  }
 
-  function nextQuestion() {
-    const questionElement = document.getElementById(`question-${currentQuestion}`);
-    const selectedAnswer = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
+  <!-- Modal -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <div id="info-container"></div>
+      <button id="closeModal" class="close-btn">Tutup</button>
+    </div>
+  </div>
 
-    if (selectedAnswer && selectedAnswer.value === answers[`q${currentQuestion}`]) {
-      score++;
+  <!-- Script -->
+  <script>
+      const rumahAdatData = {
+        Jawa: [
+    { name: 'Rumah Badui (Banten)', info: 'Gaya bangunan rumah sangat sederhana, Batu kali digunakan sebagai penahan tanah agar tidak longsor, Jenis rumah panggung.', image: 'https://sketchfab.com/models/129f3e88f50b4cb987b43b207fc61010/embed' },
+    { name: 'Rumah Kebaya (Betawi)', info: 'Pondasi rumah terbuat dari susunan batu alam, Dinding terbuat dari kayu nangka, Atap seperti lipatan kebaya.', image: 'https://sketchfab.com/models/fe89c4efa5c445ed8e742a57ff6dcf37/embed' },
+    { name: 'Rumah Joglo (Jawa Tengah & Jawa Timur)', info: 'Balok yang letaknya paling atas, dianggap "kepala" bangunan, Memiliki 4 pilar penyangga, Jenis rumah joglo atau pendopo.', image: 'https://sketchfab.com/models/285d403781454614b04e97b64454ff73/embed' }
+  ],
+   Sumatera: [
+    { name: 'Rumah Krong Bade (Aceh)', info: 'Ruang bawah sebagai penyimpanan bahan pangan. Ruang bawah sebagai aktivitas menenun kain. Jenis rumah panggung.', image: 'https://sketchfab.com/models/8d131cf689a64016aedf96875811c307/embed' },
+    { name: 'Rumah Selaso Jatuh Kembar (Riau)', info: 'Keseluruhan dibuat dari bahan alam. Hiasan dan bangunan mirip perahu. Difungsikan sebagai balai pertemuan adat.', image: 'https://sketchfab.com/models/528df8a16b7741b983fe0b3ad7dd4038/embed' },
+    { name: 'Rumah Nuwou Sesat (Lampung)', info: 'Atap terbuat dari ilalang/kayu. Umumnya dibuat dekat dengan sungai. Fungsi utama sebagai tempat pertemuan.', image: 'https://sketchfab.com/models/1558ff3c6748414295bb7b8f9efeb96d/embed' }
+  ],
+      Sulawesi: [
+      { name: 'Rumah Dulohupa (Gorontalo)', info: 'Kata Dulohupa berarti mufakat. Pilar kayu sebagai hiasan dan lambang. Jenis rumah panggung.', image: 'https://sketchfab.com/models/2883217769ee476c980c8f3367dd5163/embed' },
+  { name: 'Rumah Pewaris (Sulawesi Tengah)', info: 'Secara keseluruhan terbuat dari kayu ulin. Memiliki ukiran-ukiran pada bagian rumah. Jenis rumah panggung.', image: 'https://sketchfab.com/models/74a3c52871584c1b87d1c879c7739f0e/embed' },
+  { name: 'Rumah Tongkonan (Sulawesi Selatan)', info: 'Bahan tidak memiliki unsur logam. Atap dibuat dari injuk atau rumbia. Atap berbentuk perahu terbalik.', image: 'https://sketchfab.com/models/583cec1e58d443b9920fc13414d5049a/embed' }
+],
+      Kalimantan: [
+      { name: 'Rumah Baloy (Kalimantan Utara)', info: 'Bahan keseluruhan terbuat dari kayu ulin. Terdapat ukiran khas daerah pesisir. Jenis rumah panggung.', image: 'https://sketchfab.com/models/90bf5d19b3a245e685622b8561d44000/embed' },
+  { name: 'Rumah Istana Kesultanan (Kalimantan Barat)', info: 'Terbuat murni dari kayu. Arsitektur memadukan unsur melayu dan islam. Warna dinding putih dan warna atap coklat gelap.', image: 'https://sketchfab.com/models/19492b420bf64443877f89091db5cbc2/embed' },
+  { name: 'Rumah Bubungan Tinggi (Kalimantan Selatan)', info: 'Bentuk atap bagian tengah tinggi dan lancip. Tangga naik selalu memiliki jumlah ganjil. Diluar rumah terdapat pagar keliling.', image: 'https://sketchfab.com/models/e7bf39dd73be4f3cbe215140fab80773/embed' }
+],
+     Bali: [
+  { name: 'Rumah Krong Bade (Bali)', info: 'Gapura atau gerbang didesain seperti candi. Disebut gerbang terbelah. Terdapat patung di sekitar gapura.', image: 'https://sketchfab.com/models/a1d867e648694191afb9aa33ab1a319f/embed' }
+],
+Papua: [
+  { name: 'Rumah Honai (Papua)', info: 'Atap terbentuk kerucut dari jerami. Lantai beralaskan tanah. Tidak memiliki jendela.', image: 'https://sketchfab.com/models/666e96defd3c40fc856fc9c81ccb64ef/embed' },
+  { name: 'Rumah Kaki Seribu (Papua)', info: 'Atap daun jerami. Banyak tiang penopang. Jenis rumah panggung.', image: 'https://sketchfab.com/models/7bd4ef887299486486db672b822958c4/embed' }
+],
+Maluku: [
+  { name: 'Rumah Sasadu (Maluku Utara)', info: 'Bahan alam, kayu, dan daun sagu. Berfungsi untuk tempat pertemuan adat. Berfungsi sebagai tempat tinggal adat suku sasi.', image: 'https://sketchfab.com/models/2c12c93914864ac697066f7a93afe34d/embed' }
+],
+"Nusa Tenggara": [
+  { name: 'Rumah Dalam Loka (Nusa Tenggara Barat)', info: 'Material rumah adalah kayu dan ijuk. Terdapat 99 tiang penopang. Lambang tahta kesultanan Sumbawa.', image: 'https://sketchfab.com/models/bffb934d5c294740a6488545eab035d2/embed' }
+]
+
+    };
+
+    const sliderContainer = document.getElementById('sliderContainer');
+    const slider = document.getElementById('slider');
+    const infoModal = document.getElementById('infoModal');
+    const infoContainer = document.getElementById('info-container');
+    let currentIndex = 0;
+    let selectedPulau = '';
+
+    function showRumahAdat(pulau) {
+      selectedPulau = pulau;
+      const rumahAdat = rumahAdatData[pulau];
+      slider.innerHTML = ''; // Clear previous slides
+
+      rumahAdat.forEach(item => {
+        const slide = document.createElement('div');
+        slide.classList.add('slide');
+        slide.textContent = item.name;
+        slide.addEventListener('click', () => showInfo(item));
+        slider.appendChild(slide);
+      });
+
+      sliderContainer.classList.remove('hidden');
+      document.getElementById('pulauSelection').classList.add('hidden');
+      updateSlider();
     }
 
-    questionElement.classList.add("hidden");
-    currentQuestion++;
+    function showInfo(item) {
+  infoContainer.innerHTML = `
+  <div class="sketchfab-embed-wrapper"> <iframe title="Rumah Baduy" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="none" allow="autoplay;  xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share  width="450" height="180"  src="${item.image}"> </iframe> 
+  
+    <h2 class="text-lg font-bold mb-2">${item.name}</h2>
+    <p>${item.info}</p><br />
+  `;
+  infoModal.style.display = 'flex';
+}
 
-    const nextQuestionElement = document.getElementById(`question-${currentQuestion}`);
-    if (nextQuestionElement) {
-      nextQuestionElement.classList.remove("hidden");
-    } else {
-      submitQuiz();
-    }
-  }
 
-  function prevQuestion() {
-    if (currentQuestion > 1) {
-      currentQuestion--;
-      showQuestion(currentQuestion);
-    }
-  }
-
-  function submitQuiz() {
-    document.getElementById('quiz-result').innerHTML = `
-      <h2 class="text-2xl font-bold">Hasil Kuis</h2>
-      <p>Skor Anda: ${score}/${totalQuestions}</p>
-      <p>Jumlah Jawaban Benar: ${score}</p>
-      <p>Jumlah Jawaban Salah: ${totalQuestions - score}</p>
-    `;
-    
-    document.getElementById('quiz-result').classList.remove('hidden');
-    document.getElementById('result').classList.add('hidden');
-    document.getElementById('quiz-container').classList.add('hidden');
-    document.getElementById('next-btn').classList.add('hidden');
-    document.getElementById('prev-btn').classList.add('hidden');
-  }
-
-  const answers = {
-    q1: 'Rumah Honai',
-    q2: 'Aceh',
-    q3: 'Terbuat dari kayu dan bambu',
-    q4: 'Rumah Joglo',
-    q5: 'Lampung',
-    q6: 'Sulawesi Selatan',
-    q7: 'Rumah Gapura Candi Bentar',
-    q8: 'Rumah Baileo',
-    q9: 'Rumah Baloy',
-    q10: 'Gorontalo'
-  };
-
-  function checkAnswer() {
-    const currentAnswerKey = `q${currentQuestion}`;
-    const selectedAnswer = document.querySelector(`input[name="${currentAnswerKey}"]:checked`);
-    const resultContainer = document.getElementById('result');
-
-    resultContainer.classList.remove('hidden');
-
-    if (selectedAnswer) {
-      if (selectedAnswer.value === answers[currentAnswerKey]) {
-        resultContainer.textContent = 'Benar!';
-        resultContainer.classList.add('correct');
-        resultContainer.classList.remove('incorrect');
-
-        setTimeout(() => {
-          nextQuestion();
-          resultContainer.classList.add('hidden');
-        }, 1000);
-      } else {
-        resultContainer.textContent = 'Waduh salah';
-        resultContainer.classList.add('incorrect');
-        resultContainer.classList.remove('correct');
-
-        setTimeout(() => {
-          nextQuestion();
-          resultContainer.classList.add('hidden');
-        }, 1000);
-      }
-    } else {
-      resultContainer.textContent = 'Silakan pilih salah satu jawaban.';
-    }
-  }
-
-  showQuestion(currentQuestion);
-</script>
-
-  </script>
-  <audio id="bgMusic" src="music_play.mp3" loop></audio>
-
-<script>
-    // Memutar musik secara otomatis ketika halaman dimuat
-    window.addEventListener('load', function () {
-        const music = document.getElementById('bgMusic');
-        music.play().catch(error => {
-            console.log("Autoplay mungkin dicegah oleh browser: ", error);
-        });
+    document.getElementById('closeModal').addEventListener('click', () => {
+      infoModal.style.display = 'none';
     });
-</script>
 
-  
-  
+    document.getElementById('prev').addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    });
 
+    document.getElementById('next').addEventListener('click', () => {
+      const totalSlides = rumahAdatData[selectedPulau].length;
+      if (currentIndex < totalSlides - 1) {
+        currentIndex++;
+        updateSlider();
+      }
+    });
 
+    function updateSlider() {
+      slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    document.getElementById('backToPulauSelection').addEventListener('click', () => {
+      sliderContainer.classList.add('hidden');
+      document.getElementById('pulauSelection').classList.remove('hidden');
+      currentIndex = 0; // Reset slider to the first slide
+    });
+  </script>
+    <audio id="bgMusic" src="music_play.mp3" loop></audio>
+
+    <script>
+        // Memutar musik secara otomatis ketika halaman dimuat
+        window.addEventListener('load', function () {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(error => {
+                console.log("Autoplay mungkin dicegah oleh browser: ", error);
+            });
+        });
+    </script>
+    
+    <script>
+      function animatePulauSelection() {
+        const pulauSelection = document.getElementById("pulauSelection");
+        pulauSelection.classList.add("animate__animated", "animate__zoomIn");
+      }
+      </script>
+      
+      
 </body>
+
 </html>
